@@ -10,17 +10,18 @@ const ForgotPassword = ({navigation}) => {
     <View style={styles.page}>
       <View style={styles.wrapperIcon}>
         <Gap height={24} />
-          <View style={styles.ilustration}>
-        <ILForgotPassword />
-          </View>
+        <View style={styles.ilustration}>
+          <ILForgotPassword />
+        </View>
         <Gap height={24} />
         <Text style={styles.title}>Forgot Password?</Text>
         <Text style={styles.subTitle}>
           Enter the email address you used when you joined and we'll send you
           instructions to reset your password.
         </Text>
-        <Gap height={24} />
-        <Label title="Email Address" />
+      </View>
+      <View>
+        <Label title="Email address" />
         <Gap height={8} />
         <TextInput placeholder="name@example.com" />
       </View>
@@ -28,7 +29,7 @@ const ForgotPassword = ({navigation}) => {
         <Button title="Submit" />
         <Gap height={24} />
         <View style={styles.Link}>
-        <Link title="Resend a new code" onPress={() => {}} />
+          <Link title="Resend a new code" onPress={() => {}} />
         </View>
         <Gap height={24} />
       </View>
@@ -45,10 +46,9 @@ const styles = StyleSheet.create({
     padding: 24,
     justifyContent: 'space-between',
   },
-  wrapperIcon: {
-  },
+  wrapperIcon: {},
   ilustration: {
-      alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     fontSize: 28,
@@ -64,9 +64,9 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[300],
   },
   form: {
-      alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   Link: {
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
