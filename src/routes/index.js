@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Splash, SignIn, SignUp, Verification} from '../pages';
+import {Splash, SignIn, SignUp, Verification, ForgotPassword} from '../pages';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,9 +22,14 @@ const Routers = () => {
         component={SignUp}
         options={{headerShown: false}}
       />
-            <Stack.Screen
+      <Stack.Screen
         name="Verification"
         component={Verification}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -25,13 +25,18 @@ const SignUp = ({navigation}) => {
         <Gap height={8} />
         <TextInput placeholder="name@example.com" />
         <Gap height={8} />
-        <Label title="Password" subTitle="Forgot Password" type="password" />
+        <Label
+          title="Password"
+          subTitle="Forgot Password"
+          type="password"
+          onPress={() => navigation.navigate('ForgotPassword')}
+        />
         <Gap height={8} />
         <TextInput placeholder="********************" />
         <Gap height={8} />
         <View style={styles.wrapperCheck}>
-         <CheckBox />
-          <Gap width={6}/>
+          <CheckBox />
+          <Gap width={6} />
           <Label title="Remember me" />
         </View>
         <Gap height={48} />
@@ -41,7 +46,10 @@ const SignUp = ({navigation}) => {
       <View>
         <View style={styles.wrapperLink}>
           <Text style={styles.titleOr}>Don't have an account yet? </Text>
-          <Link title="Sign up here" onPress={() => navigation.navigate('SignUp')}/>
+          <Link
+            title="Sign up here"
+            onPress={() => navigation.navigate('SignUp')}
+          />
         </View>
         <Gap height={24} />
       </View>

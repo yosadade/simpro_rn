@@ -1,41 +1,34 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
-import {Button, Gap, Link} from '../../components';
+import {Button, Gap, Label, Link, TextInput} from '../../components';
 import {colors, fonts} from '../../utils';
-import {ILVerify} from '../../assets';
+import {ILForgotPassword} from '../../assets';
 
 const ForgotPassword = ({navigation}) => {
   return (
     <View style={styles.page}>
       <View style={styles.wrapperIcon}>
-        <ILVerify />
         <Gap height={24} />
-        <Text style={styles.title}>Verification</Text>
+          <View style={styles.ilustration}>
+        <ILForgotPassword />
+          </View>
+        <Gap height={24} />
+        <Text style={styles.title}>Forgot Password?</Text>
         <Text style={styles.subTitle}>
-          We sent a verification code to your email. Enter the code from the
-          email in the field below.
+          Enter the email address you used when you joined and we'll send you
+          instructions to reset your password.
         </Text>
         <Gap height={24} />
-        <OTPInputView
-          style={styles.otpInput}
-          pinCount={4}
-          //   code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
-          //   onCodeChanged = {code => { this.setState({code})}}
-          autoFocusOnLoad
-          codeInputFieldStyle={styles.underlineStyleBase}
-          codeInputHighlightStyle={styles.underlineStyleHighLighted}
-          onCodeFilled={code => {
-            console.log(`Code is ${code}, you are good to go!`);
-          }}
-        />
+        <Label title="Email Address" />
+        <Gap height={8} />
+        <TextInput placeholder="name@example.com" />
       </View>
       <View>
-        <Button title="Verify my account" />
+        <Button title="Submit" />
         <Gap height={24} />
-        <View style={styles.wrapperLink}>
-          <Text style={styles.titleOr}>Haven't received it? </Text>
-          <Link title="Resend a new code" onPress={() => {}} />
+        <View style={styles.Link}>
+        <Link title="Resend a new code" onPress={() => {}} />
         </View>
         <Gap height={24} />
       </View>
@@ -51,10 +44,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     padding: 24,
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   wrapperIcon: {
-    alignItems: 'center',
+  },
+  ilustration: {
+      alignItems: 'center'
   },
   title: {
     fontSize: 28,
@@ -69,33 +63,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: fonts.primary[300],
   },
-  wrapperLink: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+  form: {
+      alignItems: 'flex-start'
   },
-  titleOr: {
-    fontSize: 15,
-    fontFamily: fonts.primary[300],
-    color: '#9A9B9D',
-  },
-  otpInput: {
-    width: 250, 
-    height: 100,
-  },
-  borderStyleBase: {
-    width: 30,
-    height: 45,
-  },
-  borderStyleHighLighted: {
-    borderColor: '#F19828',
-  },
-  underlineStyleBase: {
-    width: 30,
-    height: 45,
-    borderWidth: 0,
-    borderBottomWidth: 1,
-  },
-  underlineStyleHighLighted: {
-    borderColor: '#F19828',
-  },
+  Link: {
+    alignItems: 'center'
+  }
 });

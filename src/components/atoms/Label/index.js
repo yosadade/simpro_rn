@@ -2,12 +2,12 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {fonts} from '../../../utils';
 
-const Label = ({title, subTitle, type}) => {
+const Label = ({title, subTitle, type, onPress}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       {type === 'password' && (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
           <Text style={styles.subTitle}>{subTitle}</Text>
         </TouchableOpacity>
       )}
