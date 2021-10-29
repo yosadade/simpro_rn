@@ -4,7 +4,7 @@ import {ICUnCheck} from '../../assets';
 import {Button, CheckBox, Gap, Label, Link, TextInput} from '../../components';
 import {colors, fonts} from '../../utils';
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   return (
     <View style={styles.page}>
       <View>
@@ -35,7 +35,7 @@ const SignUp = () => {
           <Label type="password" subTitle="Termns and Conditions" />
         </View>
         <Gap height={48} />
-        <Button title="Sign In" />
+        <Button title="Sign Up" onPress={() => navigation.replace('Verification')}/>
       </View>
 
       <View style={styles.wrapperLink}>

@@ -1,13 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {Gap} from '..';
 import {ICGoogle} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const Button = ({type, title}) => {
+const Button = ({type, title, onPress}) => {
   if (type === 'icon') {
     return (
-      <TouchableOpacity style={styles.page(type)}>
+      <TouchableOpacity style={styles.page(type)} onPress={onPress}>
         <ICGoogle />
         <Gap width={8} />
         <Text style={styles.title(type)}>{title}</Text>
@@ -15,7 +15,7 @@ const Button = ({type, title}) => {
     );
   }
   return (
-    <TouchableOpacity style={styles.page(type)}>
+    <TouchableOpacity style={styles.page(type)} onPress={onPress}>
       <Text style={styles.title(type)}>{title}</Text>
     </TouchableOpacity>
   );
