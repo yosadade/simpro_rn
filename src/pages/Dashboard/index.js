@@ -19,6 +19,5 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: '#F9FBFD',
-    padding: 24,
   },
 });

@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    backgroundColor: '#FFFFFF',
+    padding: 24
   },
   profile: {
     flexDirection: 'row',
