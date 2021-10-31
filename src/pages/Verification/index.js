@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     color: '#9A9B9D',
   },
   otpInput: {
-    width: 250, 
+    width: 250,
     height: 100,
   },
   borderStyleBase: {

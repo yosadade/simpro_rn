@@ -1,6 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {ICUnCheck} from '../../assets';
+import {StyleSheet, Text, View} from 'react-native';
 import {Button, CheckBox, Gap, Label, Link, TextInput} from '../../components';
 import {colors, fonts} from '../../utils';
 
@@ -35,12 +34,18 @@ const SignUp = ({navigation}) => {
           <Label type="password" subTitle="Termns and Conditions" />
         </View>
         <Gap height={48} />
-        <Button title="Sign Up" onPress={() => navigation.replace('Verification')}/>
+        <Button
+          title="Sign Up"
+          onPress={() => navigation.replace('Verification')}
+        />
       </View>
 
       <View style={styles.wrapperLink}>
         <Text style={styles.titleOr}>Don't have an account yet? </Text>
-        <Link title="Sign up here" />
+        <Link
+          title="Sign in here"
+          onPress={() => navigation.navigate('SignIn')}
+        />
       </View>
     </View>
   );

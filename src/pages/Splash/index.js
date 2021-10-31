@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ICLogo} from '../../assets';
+import { Gap } from '../../components';
 import {colors, fonts} from '../../utils';
 
 const Splash = ({navigation}) => {
@@ -11,6 +12,10 @@ const Splash = ({navigation}) => {
   });
   return (
     <View style={styles.page}>
+      <View style={styles.icon}>
+      <ICLogo />
+      </View>
+      <Gap width={15} />
       <Text style={styles.title}>Simpro</Text>
     </View>
   );
@@ -25,6 +30,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  icon: {
+    width: 76,
+    height: 76,
+    borderRadius: 76,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   title: {
     fontSize: 38,

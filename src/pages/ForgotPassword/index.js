@@ -24,10 +24,10 @@ const ForgotPassword = ({navigation}) => {
         <Label title="Email address" />
         <Gap height={8} />
         <TextInput placeholder="name@example.com" />
+        <Gap height={24} />
+        <Button title="Submit" onPress={() => navigation.replace('SignIn')} />
       </View>
       <View>
-        <Button title="Submit" />
-        <Gap height={24} />
         <View style={styles.Link}>
           <Link title="Resend a new code" onPress={() => {}} />
         </View>
