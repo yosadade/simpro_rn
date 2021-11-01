@@ -3,6 +3,7 @@ import CardFinance from './CardFinance';
 import CardOnGoing from './CardOnGoing';
 import CardDeveloper from './CardDeveloper';
 import CardProjectActive from './CardProjectActive';
+import CardProjectProgress from './CardProjectProgress';
 
 export {
   BottomNavigator,
@@ -10,4 +11,5 @@ export {
   CardOnGoing,
   CardDeveloper,
   CardProjectActive,
+  CardProjectProgress,
 };

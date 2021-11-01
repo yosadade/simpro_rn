@@ -4,7 +4,20 @@ import TextInput from './TextInput';
 import Label from './Label';
 import Link from './Link';
 import CheckBox from './CheckBox';
-import TabItem from './TabItem'
-import Profile from './Profile'
+import TabItem from './TabItem';
+import Profile from './Profile';
+import SearchBar from './SearchBar';
+import ProgressBar from './ProgressBar';
 
-export {Button, Gap, TextInput, Label, Link, CheckBox, TabItem, Profile};
+export {
+  Button,
+  Gap,
+  TextInput,
+  Label,
+  Link,
+  CheckBox,
+  TabItem,
+  Profile,
+  SearchBar,
+  ProgressBar,
+};
