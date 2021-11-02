@@ -1,8 +1,8 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Label} from '..';
 import {Gap} from '../..';
-import {ICEdit, ICEditDetail} from '../../../assets';
+import {ICEditDetail} from '../../../assets';
 import {fonts} from '../../../utils';
 
 const CardDetail = ({

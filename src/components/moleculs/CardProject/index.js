@@ -1,7 +1,16 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Divider, Gap, ProgressBar} from '../..';
-import {ICEdit, ICTrash, ILProfile} from '../../../assets';
+import {
+  ICBag,
+  ICCLock,
+  ICDollar,
+  ICEdit,
+  ICHourGlass,
+  ICStatus,
+  ICTrash,
+  ILProfile,
+} from '../../../assets';
 import {fonts} from '../../../utils';
 
 const CardProject = ({onPress}) => {
@@ -31,12 +40,12 @@ const CardProject = ({onPress}) => {
       <Gap height={12} />
       <View style={styles.wrapper}>
         <View style={styles.wrapper}>
-          <ICEdit />
+          <ICDollar />
           <Gap width={4} />
           <Text style={styles.title}>IDR. 12.000.000</Text>
         </View>
         <View style={styles.wrapper}>
-          <ICEdit />
+          <ICBag />
           <Gap width={4} />
           <Text style={styles.title}>Projectly</Text>
         </View>
@@ -44,12 +53,12 @@ const CardProject = ({onPress}) => {
       <Gap height={12} />
       <View style={styles.wrapper}>
         <View style={styles.wrapper}>
-          <ICEdit />
+          <ICStatus />
           <Gap width={4} />
           <Text style={styles.title}>On Going</Text>
         </View>
         <View style={styles.wrapper}>
-          <ICEdit />
+          <ICHourGlass />
           <Gap width={4} />
           <Text style={styles.title}>4 month</Text>
         </View>
@@ -60,8 +69,8 @@ const CardProject = ({onPress}) => {
       <View style={styles.wrapper}>
         <Text style={styles.label}>Progress</Text>
         <View style={styles.badge}>
-          <ICEdit />
-          <Gap width={8} />
+          <ICCLock />
+          <Gap width={4} />
           <Text style={styles.title}>35 Days Left</Text>
         </View>
       </View>

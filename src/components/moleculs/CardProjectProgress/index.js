@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {fonts} from '../../../utils';
 import {ProgressBar, Gap} from '../../../components';
-import {ICEdit} from '../../../assets';
+import {ICCheckRound, ICEdit, ICUnCheckRound} from '../../../assets';
 
 const CardProgressProject = () => {
+  const [check, setCheck] = useState(false);
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Project Active</Text>
@@ -14,55 +15,15 @@ const CardProgressProject = () => {
           <View style={styles.wrapper}>
             <Text style={styles.title}>87%</Text>
             <Gap width={6} />
-            <TouchableOpacity style={styles.btn}>
-              <ICEdit />
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => setCheck(!check)}>
+              {check ? <ICCheckRound /> : <ICUnCheckRound />}
             </TouchableOpacity>
           </View>
         </View>
         <Gap height={6} />
         <ProgressBar color="#EEE5FF" />
-      </View>
-      <View style={styles.card}>
-        <View style={styles.wrapper}>
-          <Text style={styles.title}>Alusio</Text>
-          <View style={styles.wrapper}>
-            <Text style={styles.title}>87%</Text>
-            <Gap width={6} />
-            <TouchableOpacity style={styles.btn}>
-              <ICEdit />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <Gap height={6} />
-        <ProgressBar />
-      </View>
-      <View style={styles.card}>
-        <View style={styles.wrapper}>
-          <Text style={styles.title}>Alusio</Text>
-          <View style={styles.wrapper}>
-            <Text style={styles.title}>87%</Text>
-            <Gap width={6} />
-            <TouchableOpacity style={styles.btn}>
-              <ICEdit />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <Gap height={6} />
-        <ProgressBar color="#A0D9B4" />
-      </View>
-      <View style={styles.card}>
-        <View style={styles.wrapper}>
-          <Text style={styles.title}>Alusio</Text>
-          <View style={styles.wrapper}>
-            <Text style={styles.title}>87%</Text>
-            <Gap width={6} />
-            <TouchableOpacity style={styles.btn}>
-              <ICEdit />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <Gap height={6} />
-        <ProgressBar color="#FFAA8A" />
       </View>
     </View>
   );

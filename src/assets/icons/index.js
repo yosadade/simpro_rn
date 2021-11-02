@@ -14,8 +14,19 @@ import ICTrash from './trash-alt.svg';
 import ICEdit from './edit.svg';
 import ICArrowUp from './angle-up.svg';
 import ICEditDetail from './edit-detail.svg';
-import ICBack from './angle-left-b.svg'
-import ICDollar from './usd-circle.svg'
+import ICBack from './angle-left-b.svg';
+import ICDollar from './usd-circle.svg';
+import ICCLock from './clock.svg';
+import ICStatus from './clipboard-notes.svg';
+import ICBag from './bag.svg';
+import ICHourGlass from './hourglass.svg';
+import ICCheckRound from './check.svg'
+import ICUnCheckRound from './uncheck.svg'
+import ICCompleted from './project-completed.svg'
+import ICChart from './chart.svg'
+import ICChartBar from './chart-bar.svg'
+import ICChartPie from './chart-pie.svg'
+import ICChartLine from './chart-line.svg'
 
 export {
   ICLogo,
@@ -36,4 +47,15 @@ export {
   ICEditDetail,
   ICBack,
   ICDollar,
+  ICCLock,
+  ICStatus,
+  ICBag,
+  ICHourGlass,
+  ICCheckRound,
+  ICUnCheckRound,
+  ICCompleted,
+  ICChart,
+  ICChartBar,
+  ICChartLine,
+  ICChartPie,
 };

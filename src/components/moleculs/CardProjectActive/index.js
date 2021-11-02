@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Gap} from '../..';
-import {ICArrowUp, ICEdit, ICTrash} from '../../../assets';
+import {ICArrowUp, ICChart, ICChartBar, ICChartLine, ICChartPie, ICCompleted, ICEdit, ICTrash} from '../../../assets';
 import {fonts} from '../../../utils';
 
 const CardProjectActive = () => {
@@ -10,7 +10,9 @@ const CardProjectActive = () => {
       <Text style={styles.label}>Project</Text>
       <View style={styles.wrapper}>
         <View style={styles.wrapperCash}>
-          <View style={styles.image} />
+          <View style={styles.image}>
+            <ICChartBar />
+          </View>
           <View>
             <Text style={styles.title}>Prospek</Text>
             <Text style={styles.subTitle}>0</Text>
@@ -24,7 +26,9 @@ const CardProjectActive = () => {
       </View>
       <View style={styles.wrapper}>
         <View style={styles.wrapperCash}>
-          <View style={styles.image} />
+          <View style={styles.image}>
+            <ICChart />
+          </View>
           <View>
             <Text style={styles.title}>On Going</Text>
             <Text style={styles.subTitle}>11</Text>
@@ -38,7 +42,9 @@ const CardProjectActive = () => {
       </View>
       <View style={styles.wrapper}>
         <View style={styles.wrapperCash}>
-          <View style={styles.image} />
+          <View style={styles.image}>
+            <ICChartLine />
+          </View>
           <View>
             <Text style={styles.title}>On Hold</Text>
             <Text style={styles.subTitle}>3</Text>
@@ -52,7 +58,9 @@ const CardProjectActive = () => {
       </View>
       <View style={styles.wrapper}>
         <View style={styles.wrapperCash}>
-          <View style={styles.image} />
+          <View style={styles.image}>
+            <ICChartPie />
+          </View>
           <View>
             <Text style={styles.title}>Maintenance</Text>
             <Text style={styles.subTitle}>2</Text>
@@ -66,7 +74,9 @@ const CardProjectActive = () => {
       </View>
       <View style={styles.wrapper}>
         <View style={styles.wrapperCash}>
-          <View style={styles.image} />
+          <View style={styles.image}>
+            <ICCompleted />
+          </View>
           <View>
             <Text style={styles.title}>Complete</Text>
             <Text style={styles.subTitle}>21</Text>
@@ -110,6 +120,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#FFE18C',
     marginRight: 12,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   title: {
     fontSize: 14,
