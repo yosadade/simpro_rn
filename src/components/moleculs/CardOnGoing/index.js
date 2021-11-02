@@ -15,9 +15,9 @@ const CardOnGoing = () => {
           <Text>QA</Text>
         </View>
         <View>
-            <View style={styles.badgeType}>
-        <Text style={styles.titleType}>Projectly</Text>
-            </View>
+          <View style={styles.badgeType}>
+            <Text style={styles.titleType}>Projectly</Text>
+          </View>
           <Text>QA</Text>
           <Text>QA</Text>
         </View>
@@ -75,5 +75,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFC107',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });

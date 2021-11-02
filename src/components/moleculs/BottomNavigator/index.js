@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import { colors } from '../../../utils';
+import {colors} from '../../../utils';
 import {TabItem} from '../../atoms';
 
 const ButtomNavigator = ({state, descriptors, navigation}) => {
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
     backgroundColor: colors.primary,
-    paddingVertical: 20,
+    paddingVertical: 14,
     paddingHorizontal: 30,
     shadowColor: '#000',
     shadowOffset: {

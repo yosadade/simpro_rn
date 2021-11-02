@@ -6,6 +6,7 @@ import ForgotPassword from './ForgotPassword';
 import Dashboard from './Dashboard';
 import Project from './Project';
 import Employee from './Employee';
+import DetailProject from './DetailProject';
 
 export {
   Splash,
@@ -16,4 +17,5 @@ export {
   Dashboard,
   Project,
   Employee,
+  DetailProject,
 };

@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
-    padding: 24
+    padding: 24,
   },
   profile: {
     flexDirection: 'row',

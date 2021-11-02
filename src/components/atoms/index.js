@@ -8,6 +8,8 @@ import TabItem from './TabItem';
 import Profile from './Profile';
 import SearchBar from './SearchBar';
 import ProgressBar from './ProgressBar';
+import Divider from './Divider';
+import CardDetail from './CardDetail';
 
 export {
   Button,
@@ -20,4 +22,6 @@ export {
   Profile,
   SearchBar,
   ProgressBar,
+  Divider,
+  CardDetail,
 };

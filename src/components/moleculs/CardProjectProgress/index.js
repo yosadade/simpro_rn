@@ -7,12 +7,26 @@ import {ICEdit} from '../../../assets';
 const CardProgressProject = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Alusio</Text>
+      <Text style={styles.label}>Project Active</Text>
       <View style={styles.card}>
         <View style={styles.wrapper}>
           <Text style={styles.title}>Alusio</Text>
           <View style={styles.wrapper}>
-            <Text style={styles.title}>86%</Text>
+            <Text style={styles.title}>87%</Text>
+            <Gap width={6} />
+            <TouchableOpacity style={styles.btn}>
+              <ICEdit />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Gap height={6} />
+        <ProgressBar color="#EEE5FF" />
+      </View>
+      <View style={styles.card}>
+        <View style={styles.wrapper}>
+          <Text style={styles.title}>Alusio</Text>
+          <View style={styles.wrapper}>
+            <Text style={styles.title}>87%</Text>
             <Gap width={6} />
             <TouchableOpacity style={styles.btn}>
               <ICEdit />
@@ -21,6 +35,34 @@ const CardProgressProject = () => {
         </View>
         <Gap height={6} />
         <ProgressBar />
+      </View>
+      <View style={styles.card}>
+        <View style={styles.wrapper}>
+          <Text style={styles.title}>Alusio</Text>
+          <View style={styles.wrapper}>
+            <Text style={styles.title}>87%</Text>
+            <Gap width={6} />
+            <TouchableOpacity style={styles.btn}>
+              <ICEdit />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Gap height={6} />
+        <ProgressBar color="#A0D9B4" />
+      </View>
+      <View style={styles.card}>
+        <View style={styles.wrapper}>
+          <Text style={styles.title}>Alusio</Text>
+          <View style={styles.wrapper}>
+            <Text style={styles.title}>87%</Text>
+            <Gap width={6} />
+            <TouchableOpacity style={styles.btn}>
+              <ICEdit />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Gap height={6} />
+        <ProgressBar color="#FFAA8A" />
       </View>
     </View>
   );

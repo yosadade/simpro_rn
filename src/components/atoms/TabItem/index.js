@@ -1,7 +1,14 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
-import { ICEmployee, ICEmployeeActive, ICHome, ICHomeActive, ICProject, ICProjectActive } from '../../../assets';
-import { fonts } from '../../../utils';
+import {
+  ICEmployee,
+  ICEmployeeActive,
+  ICHome,
+  ICHomeActive,
+  ICProject,
+  ICProjectActive,
+} from '../../../assets';
+import {fonts} from '../../../utils';
 
 const TabItems = ({isFocused, onLongPress, onPress, label}) => {
   const Icon = ({}) => {

@@ -13,6 +13,9 @@ import ICNotification from './bell.svg';
 import ICTrash from './trash-alt.svg';
 import ICEdit from './edit.svg';
 import ICArrowUp from './angle-up.svg';
+import ICEditDetail from './edit-detail.svg';
+import ICBack from './angle-left-b.svg'
+import ICDollar from './usd-circle.svg'
 
 export {
   ICLogo,
@@ -30,4 +33,7 @@ export {
   ICEdit,
   ICTrash,
   ICArrowUp,
+  ICEditDetail,
+  ICBack,
+  ICDollar,
 };

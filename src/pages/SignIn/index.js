@@ -40,7 +40,7 @@ const SignUp = ({navigation}) => {
           <Label title="Remember me" />
         </View>
         <Gap height={48} />
-        <Button title="Sign In" onPress={() => navigation.replace('MainApp')}/>
+        <Button title="Sign In" onPress={() => navigation.replace('MainApp')} />
       </View>
 
       <View>

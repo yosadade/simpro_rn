@@ -10,8 +10,9 @@ import {
   Dashboard,
   Project,
   Employee,
+  DetailProject,
 } from '../pages';
-import { BottomNavigator } from '../components';
+import {BottomNavigator} from '../components';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,12 +25,12 @@ const MainApp = () => {
         component={Dashboard}
         options={{headerShown: false}}
       />
-            <Tab.Screen
+      <Tab.Screen
         name="Project"
         component={Project}
         options={{headerShown: false}}
       />
-            <Tab.Screen
+      <Tab.Screen
         name="Employee"
         component={Employee}
         options={{headerShown: false}}
@@ -66,7 +67,12 @@ const Routers = () => {
         component={ForgotPassword}
         options={{headerShown: false}}
       />
-            <Stack.Screen
+      <Stack.Screen
+        name="DetailProject"
+        component={DetailProject}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="MainApp"
         component={MainApp}
         options={{headerShown: false}}
