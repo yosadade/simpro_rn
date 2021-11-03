@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Gap} from '../..';
-import {ICArrowUp, ICEdit, ICTrash} from '../../../assets';
+import {ICArrowUp, ICDown, ICEdit, ICTrash} from '../../../assets';
 import {fonts} from '../../../utils';
 
 const CardFinance = () => {
+  const [dropDown, setDropDown] = useState(false);
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Finance</Text>
@@ -25,8 +26,10 @@ const CardFinance = () => {
             <ICTrash />
           </TouchableOpacity>
           <Gap width={8} />
-          <TouchableOpacity style={styles.btnArrow}>
-            <ICArrowUp />
+          <TouchableOpacity
+            style={styles.btnArrow}
+            onPress={() => setDropDown(!dropDown)}>
+            {dropDown ? <ICDown /> : <ICArrowUp />}
           </TouchableOpacity>
         </View>
       </View>
@@ -47,8 +50,10 @@ const CardFinance = () => {
             <ICTrash />
           </TouchableOpacity>
           <Gap width={8} />
-          <TouchableOpacity style={styles.btnArrow}>
-            <ICArrowUp />
+          <TouchableOpacity
+            style={styles.btnArrow}
+            onPress={() => setDropDown(!dropDown)}>
+            {dropDown ? <ICDown /> : <ICArrowUp />}
           </TouchableOpacity>
         </View>
       </View>
@@ -69,8 +74,10 @@ const CardFinance = () => {
             <ICTrash />
           </TouchableOpacity>
           <Gap width={8} />
-          <TouchableOpacity style={styles.btnArrow}>
-            <ICArrowUp />
+          <TouchableOpacity
+            style={styles.btnArrow}
+            onPress={() => setDropDown(!dropDown)}>
+            {dropDown ? <ICDown /> : <ICArrowUp />}
           </TouchableOpacity>
         </View>
       </View>
@@ -91,8 +98,10 @@ const CardFinance = () => {
             <ICTrash />
           </TouchableOpacity>
           <Gap width={8} />
-          <TouchableOpacity style={styles.btnArrow}>
-            <ICArrowUp />
+          <TouchableOpacity
+            style={styles.btnArrow}
+            onPress={() => setDropDown(!dropDown)}>
+            {dropDown ? <ICDown /> : <ICArrowUp />}
           </TouchableOpacity>
         </View>
       </View>

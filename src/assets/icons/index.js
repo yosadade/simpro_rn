@@ -30,6 +30,7 @@ import ICChartLine from './chart-line.svg';
 import ICPlusCircle from './plus-circle.svg';
 import ICClipboardPink from './clipboard-notes-pink.svg';
 import ICBuilding from './building.svg'
+import ICDown from './angle-down.svg'
 
 export {
   ICLogo,
@@ -64,4 +65,5 @@ export {
   ICPlusCircle,
   ICClipboardPink,
   ICBuilding,
+  ICDown,
 };
