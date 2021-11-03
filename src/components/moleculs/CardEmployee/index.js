@@ -1,12 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Divider, Gap} from '../..';
-import {ICClipboardPink, ICCLock, ILProfile} from '../../../assets';
+import {ICBuilding, ICClipboardPink, ICCLock, ILProfile} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const CardEmployee = () => {
+const CardEmployee = ({onPress}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.wrapperRole}>
         <View style={styles.wrapperImage}>
           <Image source={ILProfile} style={styles.image} />
@@ -21,7 +21,7 @@ const CardEmployee = () => {
       <Gap width={24} />
       <Divider type="employee" />
       <Gap width={24} />
-      <View>
+      <View style={styles.detail}>
         <Text style={styles.name}>Luke Short</Text>
         <Gap height={6} />
         <View style={styles.badges}>
@@ -31,9 +31,9 @@ const CardEmployee = () => {
         <Divider />
         <Gap height={12} />
         <View style={styles.wrapper}>
-          <ICClipboardPink />
+          <ICBuilding />
           <Gap width={4} />
-          <Text style={styles.title}>1.5 Years</Text>
+          <Text style={styles.title}>Agency</Text>
         </View>
         <Gap height={6} />
         <View style={styles.wrapper}>
@@ -76,6 +76,9 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 70,
   },
+  detail: {
+    justifyContent: 'space-between',
+  },
   name: {
     fontSize: 14,
     fontFamily: fonts.primary[700],
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 14,
+    fontSize: 11,
     fontFamily: fonts.primary[400],
     color: '#212529',
   },

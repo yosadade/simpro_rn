@@ -11,6 +11,7 @@ import {
   Project,
   Employee,
   DetailProject,
+  DetailEmployee,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -70,6 +71,11 @@ const Routers = () => {
       <Stack.Screen
         name="DetailProject"
         component={DetailProject}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="DetailEmployee"
+        component={DetailEmployee}
         options={{headerShown: false}}
       />
       <Stack.Screen

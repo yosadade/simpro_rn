@@ -2,14 +2,14 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CardEmployee, Gap, Profile, SearchBar} from '../../components';
 
-const Employee = () => {
+const Employee = ({navigation}) => {
   return (
     <View style={styles.page}>
       <Profile />
       <Gap height={24} />
       <SearchBar placeholder="Search" />
       <Gap height={24} />
-      <CardEmployee />
+      <CardEmployee onPress={() => navigation.navigate('DetailEmployee')} />
     </View>
   );
 };
