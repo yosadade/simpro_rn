@@ -20,13 +20,15 @@ import ICCLock from './clock.svg';
 import ICStatus from './clipboard-notes.svg';
 import ICBag from './bag.svg';
 import ICHourGlass from './hourglass.svg';
-import ICCheckRound from './check.svg'
-import ICUnCheckRound from './uncheck.svg'
-import ICCompleted from './project-completed.svg'
-import ICChart from './chart.svg'
-import ICChartBar from './chart-bar.svg'
-import ICChartPie from './chart-pie.svg'
-import ICChartLine from './chart-line.svg'
+import ICCheckRound from './check.svg';
+import ICUnCheckRound from './uncheck.svg';
+import ICCompleted from './project-completed.svg';
+import ICChart from './chart.svg';
+import ICChartBar from './chart-bar.svg';
+import ICChartPie from './chart-pie.svg';
+import ICChartLine from './chart-line.svg';
+import ICPlusCircle from './plus-circle.svg';
+import ICClipboardPink from './clipboard-notes-pink.svg';
 
 export {
   ICLogo,
@@ -58,4 +60,6 @@ export {
   ICChartBar,
   ICChartLine,
   ICChartPie,
+  ICPlusCircle,
+  ICClipboardPink,
 };

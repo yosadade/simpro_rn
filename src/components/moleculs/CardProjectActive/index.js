@@ -1,7 +1,16 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Gap} from '../..';
-import {ICArrowUp, ICChart, ICChartBar, ICChartLine, ICChartPie, ICCompleted, ICEdit, ICTrash} from '../../../assets';
+import {
+  ICArrowUp,
+  ICChart,
+  ICChartBar,
+  ICChartLine,
+  ICChartPie,
+  ICCompleted,
+  ICEdit,
+  ICTrash,
+} from '../../../assets';
 import {fonts} from '../../../utils';
 
 const CardProjectActive = () => {
@@ -98,7 +107,10 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 4,
     backgroundColor: '#FFFFFF',
-    padding: 24,
+    padding: 12,
+    marginHorizontal: 24,
+    borderWidth: 0.5,
+    borderColor: '#DEE2E6',
   },
   label: {
     fontSize: 16,
@@ -121,7 +133,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFE18C',
     marginRight: 12,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   title: {
     fontSize: 14,

@@ -33,8 +33,11 @@ export default CardProgressProject;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
+    padding: 12,
     backgroundColor: '#FFFFFF',
+    borderWidth: 0.5,
+    borderColor: '#DEE2E6',
+    marginHorizontal: 24,
   },
   label: {
     fontSize: 16,

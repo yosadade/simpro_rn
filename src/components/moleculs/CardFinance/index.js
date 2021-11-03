@@ -106,7 +106,10 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 4,
     backgroundColor: '#FFFFFF',
-    padding: 24,
+    padding: 12,
+    marginHorizontal: 24,
+    borderWidth: 0.5,
+    borderColor: '#DEE2E6',
   },
   label: {
     fontSize: 16,

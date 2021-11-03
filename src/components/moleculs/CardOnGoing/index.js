@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#FFFFFF',
     padding: 24,
+    borderWidth: 0.5,
+    borderColor: '#DEE2E6',
   },
   label: {
     fontSize: 16,

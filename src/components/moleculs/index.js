@@ -5,6 +5,7 @@ import CardDeveloper from './CardDeveloper';
 import CardProjectActive from './CardProjectActive';
 import CardProjectProgress from './CardProjectProgress';
 import CardProject from './CardProject';
+import CardEmployee from './CardEmployee';
 
 export {
   BottomNavigator,
@@ -14,4 +15,5 @@ export {
   CardProjectActive,
   CardProjectProgress,
   CardProject,
+  CardEmployee,
 };
