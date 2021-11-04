@@ -11,6 +11,7 @@ import ProgressBar from './ProgressBar';
 import Divider from './Divider';
 import CardDetail from './CardDetail';
 import CustomModal from './CustomModal';
+import Dropdown from './Dropdown';
 
 export {
   Button,
@@ -26,4 +27,5 @@ export {
   Divider,
   CardDetail,
   CustomModal,
+  Dropdown,
 };

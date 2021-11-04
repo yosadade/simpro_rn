@@ -6,6 +6,7 @@ import CardProjectActive from './CardProjectActive';
 import CardProjectProgress from './CardProjectProgress';
 import CardProject from './CardProject';
 import CardEmployee from './CardEmployee';
+import ModalDashboard from './ModalDashboard';
 
 export {
   BottomNavigator,
@@ -16,4 +17,5 @@ export {
   CardProjectProgress,
   CardProject,
   CardEmployee,
+  ModalDashboard,
 };

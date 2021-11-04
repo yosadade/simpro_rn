@@ -1,17 +1,17 @@
 import React from 'react';
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Dimensions,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import {Button, Gap} from '..';
+import {Button, Gap, Label, TextInput} from '../..';
 import {ICCancel} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const CustomModal = ({label, icon, title, onBackdropPress, isVisible}) => {
+const ModalDashboard = ({label, icon, title, onBackdropPress, isVisible}) => {
   return (
     <Modal
       swipeDirection="left"
@@ -33,13 +33,17 @@ const CustomModal = ({label, icon, title, onBackdropPress, isVisible}) => {
             <ICCancel />
           </TouchableOpacity>
         </View>
-        <Gap height={24} />
-        <View style={styles.content}>
-          {icon}
-          <Gap height={14} />
-          <Text style={styles.title}>{title}</Text>
-        </View>
-        <Gap height={24} />
+        <ScrollView showsVerticalScrollIndicator>
+          <View style={styles.content}>
+            <Label title="Account" type="project" />
+            <Gap height={8} />
+            <TextInput />
+            <Label title="Nominal" type="project" />
+            <Gap height={8} />
+            <TextInput />
+          </View>
+        </ScrollView>
+        <Gap height={12} />
         <View style={styles.footer}>
           <View />
           <View style={styles.btnFooter}>
@@ -58,7 +62,7 @@ const CustomModal = ({label, icon, title, onBackdropPress, isVisible}) => {
   );
 };
 
-export default CustomModal;
+export default ModalDashboard;
 
 const styles = StyleSheet.create({
   container: {
@@ -66,6 +70,7 @@ const styles = StyleSheet.create({
     padding: 24,
     margin: 0,
     borderRadius: 4,
+    flex: 1,
   },
   modal: {
     backgroundColor: '#ffffff',
@@ -73,6 +78,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    alignItems: 'center',
     borderBottomColor: '#DEE2E6',
     justifyContent: 'space-between',
     padding: 12,
@@ -84,8 +90,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
   },
   content: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 12,
   },
   title: {
     fontSize: 14,
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[700],
   },
   footer: {
-    // width: deviceWidth,
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 'auto',

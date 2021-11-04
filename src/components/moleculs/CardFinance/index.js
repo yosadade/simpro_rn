@@ -1,15 +1,25 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {CustomModal, Gap} from '../..';
+import {ModalDashboard} from '..';
+import {CustomModal, Dropdown, Gap} from '../..';
 import {ICArrowUp, ICDown, ICEdit, ICTrash, ICTrashBig} from '../../../assets';
 import {fonts} from '../../../utils';
 
 const CardFinance = () => {
-  const [dropDown, setDropDown] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
+  const [detail, setDetail] = useState(false);
 
   const onDelete = () => {
     setModalDelete(!modalDelete);
+  };
+
+  const onEdit = () => {
+    setModalEdit(!modalEdit);
+  };
+
+  const onDetail = () => {
+    setDetail(!detail);
   };
 
   return (
@@ -25,7 +35,7 @@ const CardFinance = () => {
             </View>
           </View>
           <View style={styles.wrapperBtn}>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={onEdit}>
               <ICEdit />
             </TouchableOpacity>
             <Gap width={8} />
@@ -33,93 +43,32 @@ const CardFinance = () => {
               <ICTrash />
             </TouchableOpacity>
             <Gap width={8} />
-            <TouchableOpacity
-              style={styles.btnArrow}
-              onPress={() => setDropDown(!dropDown)}>
-              {dropDown ? <ICDown /> : <ICArrowUp />}
+            <TouchableOpacity style={styles.btnArrow} onPress={onDetail}>
+              {detail ? <ICDown /> : <ICArrowUp />}
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.wrapper}>
-          <View style={styles.wrapperCash}>
-            <View style={styles.image} />
-            <View>
-              <Text style={styles.title}>Receivable</Text>
-              <Text style={styles.subTitle}>11.000.000</Text>
-            </View>
-          </View>
-          <View style={styles.wrapperBtn}>
-            <TouchableOpacity style={styles.btn}>
-              <ICEdit />
-            </TouchableOpacity>
-            <Gap width={8} />
-            <TouchableOpacity style={styles.btn}>
-              <ICTrash />
-            </TouchableOpacity>
-            <Gap width={8} />
-            <TouchableOpacity
-              style={styles.btnArrow}
-              onPress={() => setDropDown(!dropDown)}>
-              {dropDown ? <ICDown /> : <ICArrowUp />}
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.wrapper}>
-          <View style={styles.wrapperCash}>
-            <View style={styles.image} />
-            <View>
-              <Text style={styles.title}>Est. Cost</Text>
-              <Text style={styles.subTitle}>11.000.000</Text>
-            </View>
-          </View>
-          <View style={styles.wrapperBtn}>
-            <TouchableOpacity style={styles.btn}>
-              <ICEdit />
-            </TouchableOpacity>
-            <Gap width={8} />
-            <TouchableOpacity style={styles.btn}>
-              <ICTrash />
-            </TouchableOpacity>
-            <Gap width={8} />
-            <TouchableOpacity
-              style={styles.btnArrow}
-              onPress={() => setDropDown(!dropDown)}>
-              {dropDown ? <ICDown /> : <ICArrowUp />}
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.wrapper}>
-          <View style={styles.wrapperCash}>
-            <View style={styles.image} />
-            <View>
-              <Text style={styles.title}>Est. Income</Text>
-              <Text style={styles.subTitle}>11.000.000</Text>
-            </View>
-          </View>
-          <View style={styles.wrapperBtn}>
-            <TouchableOpacity style={styles.btn}>
-              <ICEdit />
-            </TouchableOpacity>
-            <Gap width={8} />
-            <TouchableOpacity style={styles.btn}>
-              <ICTrash />
-            </TouchableOpacity>
-            <Gap width={8} />
-            <TouchableOpacity
-              style={styles.btnArrow}
-              onPress={() => setDropDown(!dropDown)}>
-              {dropDown ? <ICDown /> : <ICArrowUp />}
-            </TouchableOpacity>
-          </View>
-        </View>
+        <Gap height={12} />
+        {detail && <Dropdown />}
       </View>
-      <CustomModal
-        label="Delete item Permanently?"
-        title="You can only delete this item permanently"
-        icon={<ICTrashBig />}
-        isVisible={modalDelete}
-        onBackdropPress={() => setModalDelete(!modalDelete)}
-      />
+      {modalDelete && (
+        <CustomModal
+          label="Delete item Permanently?"
+          title="You can only delete this item permanently"
+          icon={<ICTrashBig />}
+          isVisible={modalDelete}
+          onBackdropPress={() => setModalDelete(!modalDelete)}
+        />
+      )}
+      {modalEdit && (
+        <ModalDashboard
+          label="Edit Item"
+          title="You can only delete this item permanently"
+          icon={<ICTrashBig />}
+          isVisible={modalEdit}
+          onBackdropPress={() => setModalEdit(!modalEdit)}
+        />
+      )}
     </>
   );
 };

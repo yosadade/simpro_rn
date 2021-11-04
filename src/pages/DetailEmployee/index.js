@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {ICBack} from '../../assets';
-import {CardDetail, CardEmployee, CardProject, Gap} from '../../components';
+import {CardDetail, CardEmployee, Gap} from '../../components';
 import {fonts} from '../../utils';
 
 const DetailEmployee = ({navigation}) => {
