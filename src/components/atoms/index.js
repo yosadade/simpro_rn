@@ -10,6 +10,7 @@ import SearchBar from './SearchBar';
 import ProgressBar from './ProgressBar';
 import Divider from './Divider';
 import CardDetail from './CardDetail';
+import CustomModal from './CustomModal';
 
 export {
   Button,
@@ -24,4 +25,5 @@ export {
   ProgressBar,
   Divider,
   CardDetail,
+  CustomModal,
 };
