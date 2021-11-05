@@ -1,26 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
-import {ICPlusCircle} from '../../assets';
-import {CardProject, Gap, Profile, SearchBar} from '../../components';
-import {colors} from '../../utils';
+  CardProject,
+  Gap,
+  ModalProject,
+  Profile,
+  SearchBar,
+} from '../../components';
 
 const Project = ({navigation}) => {
+  const [modalCreate, setModalCreate] = useState(false);
   return (
-    <View style={styles.page}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Profile />
-        <Gap height={24} />
-        <SearchBar placeholder="Search" />
-        <Gap height={24} />
-        <CardProject onPress={() => navigation.navigate('DetailProject')} />
-      </ScrollView>
-    </View>
+    <>
+      <View style={styles.page}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Profile />
+          <Gap height={24} />
+          <SearchBar
+            placeholder="Search"
+            onPress={() => setModalCreate(!modalCreate)}
+          />
+          <Gap height={24} />
+          <CardProject onPress={() => navigation.navigate('DetailProject')} />
+        </ScrollView>
+      </View>
+      <ModalProject
+        label="Create Project"
+        isVisible={modalCreate}
+        onBackdropPress={() => setModalCreate(!modalCreate)}
+      />
+    </>
   );
 };
 

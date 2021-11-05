@@ -1,12 +1,16 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Gap, Label} from '..';
+import {Gap} from '..';
 import {ICEdit, ICTrash} from '../../../assets';
+import {fonts} from '../../../utils';
 
 const Dropdown = () => {
   return (
     <View style={styles.container}>
-      <Label type="project" title="Gifari" subTitle="4.800.000" />
+      <View style={styles.wrapperTitle}>
+        <Text style={styles.title}>Gifari</Text>
+        <Text style={styles.subTitle}>4.000.000</Text>
+      </View>
       <View style={styles.wrapperBtn}>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
           <ICEdit />
@@ -33,7 +37,23 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
     marginTop: 12,
   },
+  wrapperTitle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  title: {
+    fontSize: 14,
+    color: '#212529',
+    fontFamily: fonts.primary[400],
+  },
+  subTitle: {
+    fontSize: 14,
+    color: '#9A9B9D',
+    fontFamily: fonts.primary[300],
+  },
   wrapperBtn: {
+    marginLeft: 12,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -17,7 +17,7 @@ const Profile = () => {
           <Text style={styles.role}>Project Manager</Text>
         </View>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity style={styles.icon}>
         <ICNotification />
       </TouchableOpacity>
     </View>
@@ -67,4 +67,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.normal,
     color: '#212529',
   },
+  icon: {
+    padding: 12,
+    borderColor: '#DEE2E6',
+    borderWidth: 0.5,
+    width: 40,
+    height: 40,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });

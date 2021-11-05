@@ -11,6 +11,7 @@ const SearchBar = ({
   disable,
   secureTextEntry,
   type,
+  onPress,
   ...restProps
 }) => {
   return (
@@ -26,7 +27,7 @@ const SearchBar = ({
         <ICSearch />
       </TouchableOpacity>
       <Gap width={12} />
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity style={styles.btn} onPress={onPress}>
         <ICPlusCircle />
       </TouchableOpacity>
     </View>

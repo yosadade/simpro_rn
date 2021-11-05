@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Divider, Gap, ProgressBar} from '../..';
+import {ModalProject} from '..';
+import {CustomModal, Divider, Gap, ProgressBar} from '../..';
 import {
   ICBag,
   ICCLock,
@@ -9,74 +10,101 @@ import {
   ICHourGlass,
   ICStatus,
   ICTrash,
+  ICTrashBig,
+  ICUnCheckBig,
   ILProfile,
 } from '../../../assets';
 import {fonts} from '../../../utils';
 
 const CardProject = ({onPress}) => {
+  const [modalEdit, setModalEdit] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={styles.wrapper}>
-        <Text style={styles.label}>Alusio</Text>
-        <View style={styles.wrapperBtn}>
-          <TouchableOpacity style={styles.btn}>
-            <ICEdit />
-          </TouchableOpacity>
-          <Gap width={8} />
-          <TouchableOpacity style={styles.btn}>
-            <ICTrash />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <Gap height={12} />
-      <View style={styles.wrapperProfile}>
-        <View style={styles.wrapperImage}>
-          <Image source={ILProfile} style={styles.image} />
-        </View>
-        <View style={styles.wrapperImageSecond}>
-          <Image source={ILProfile} style={styles.image} />
-        </View>
-      </View>
-      <Gap height={12} />
-      <View style={styles.wrapper}>
+    <>
+      <TouchableOpacity style={styles.container} onPress={onPress}>
         <View style={styles.wrapper}>
-          <ICDollar />
-          <Gap width={4} />
-          <Text style={styles.title}>IDR. 12.000.000</Text>
+          <Text style={styles.label}>Alusio</Text>
+          <View style={styles.wrapperBtn}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => setModalEdit(!modalEdit)}>
+              <ICEdit />
+            </TouchableOpacity>
+            <Gap width={8} />
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => setModalDelete(!modalDelete)}>
+              <ICTrash />
+            </TouchableOpacity>
+          </View>
         </View>
+        <Gap height={12} />
+        <View style={styles.wrapperProfile}>
+          <View style={styles.wrapperImage}>
+            <Image source={ILProfile} style={styles.image} />
+          </View>
+          <View style={styles.wrapperImageSecond}>
+            <Image source={ILProfile} style={styles.image} />
+          </View>
+        </View>
+        <Gap height={12} />
         <View style={styles.wrapper}>
-          <ICBag />
-          <Gap width={4} />
-          <Text style={styles.title}>Projectly</Text>
+          <View style={styles.wrapper}>
+            <ICDollar />
+            <Gap width={4} />
+            <Text style={styles.title}>IDR. 12.000.000</Text>
+          </View>
+          <View style={styles.wrapper}>
+            <ICBag />
+            <Gap width={4} />
+            <Text style={styles.title}>Projectly</Text>
+          </View>
         </View>
-      </View>
-      <Gap height={12} />
-      <View style={styles.wrapper}>
+        <Gap height={12} />
         <View style={styles.wrapper}>
-          <ICStatus />
-          <Gap width={4} />
-          <Text style={styles.title}>On Going</Text>
+          <View style={styles.wrapper}>
+            <ICStatus />
+            <Gap width={4} />
+            <Text style={styles.title}>On Going</Text>
+          </View>
+          <View style={styles.wrapper}>
+            <ICHourGlass />
+            <Gap width={4} />
+            <Text style={styles.title}>4 month</Text>
+          </View>
         </View>
+        <Gap height={24} />
+        <Divider />
+        <Gap height={12} />
         <View style={styles.wrapper}>
-          <ICHourGlass />
-          <Gap width={4} />
-          <Text style={styles.title}>4 month</Text>
+          <Text style={styles.label}>Progress</Text>
+          <View style={styles.badge}>
+            <ICCLock />
+            <Gap width={4} />
+            <Text style={styles.title}>35 Days Left</Text>
+          </View>
         </View>
-      </View>
-      <Gap height={24} />
-      <Divider />
-      <Gap height={12} />
-      <View style={styles.wrapper}>
-        <Text style={styles.label}>Progress</Text>
-        <View style={styles.badge}>
-          <ICCLock />
-          <Gap width={4} />
-          <Text style={styles.title}>35 Days Left</Text>
-        </View>
-      </View>
-      <Gap height={12} />
-      <ProgressBar color="#F19828" />
-    </TouchableOpacity>
+        <Gap height={12} />
+        <ProgressBar color="#F19828" />
+      </TouchableOpacity>
+      {modalDelete && (
+        <CustomModal
+          label="Delete item Permanently?"
+          title="You can only delete this item permanently"
+          icon={<ICTrashBig />}
+          isVisible={modalDelete}
+          onBackdropPress={() => setModalDelete(!modalDelete)}
+        />
+      )}
+      {modalEdit && (
+        <ModalProject
+          label="Edit Item"
+          icon={<ICUnCheckBig />}
+          isVisible={modalEdit}
+          onBackdropPress={() => setModalEdit(!modalEdit)}
+        />
+      )}
+    </>
   );
 };
 

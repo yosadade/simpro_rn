@@ -68,10 +68,10 @@ const DetailProject = ({navigation}) => {
           value1="Here"
           title2="Whatsapp"
           value2="Here"
-          title3=""
-          value3=""
-          title4=""
-          value4=""
+          title3="Telegram ID"
+          value3="-128388205900"
+          title4="Whatsapp ID"
+          value4="1348320340"
         />
         <Gap height={24} />
       </ScrollView>

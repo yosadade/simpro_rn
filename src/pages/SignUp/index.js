@@ -1,52 +1,91 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, CheckBox, Gap, Label, Link, TextInput} from '../../components';
 import {colors, fonts} from '../../utils';
+import useForm from '../../utils/userForm';
+import {useDispatch} from 'react-redux';
 
 const SignUp = ({navigation}) => {
+  const [form, setForm] = useForm({
+    name: '',
+    email: '',
+    role: '',
+    department: '',
+    password: '',
+  });
+
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    dispatch({type: 'SET_REGISTER', value: form});
+  };
+
   return (
     <View style={styles.page}>
-      <View>
-        <Gap height={24} />
-        <Text style={styles.title}>Create your account</Text>
-        <Text style={styles.subTitle}>Free access to our dashboard</Text>
-        <Gap height={16} />
-        <Label title="Full name" />
-        <Gap height={8} />
-        <TextInput placeholder="John doe" />
-        <Gap height={8} />
-        <Label title="Email Address" />
-        <Gap height={8} />
-        <TextInput placeholder="email@example.com" />
-        <Gap height={8} />
-        <Label title="Passoword" />
-        <Gap height={8} />
-        <TextInput placeholder="******************" />
-        <Gap height={8} />
-        <Label title="Confirm Passoword" />
-        <Gap height={8} />
-        <TextInput placeholder="******************" />
-        <Gap height={8} />
-        <View style={styles.wrapperCheck}>
-          <CheckBox />
-          <Gap width={6} />
-          <Label title="I accepted the " />
-          <Label type="password" subTitle="Termns and Conditions" />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
+          <Text style={styles.title}>Create your account</Text>
+          <Text style={styles.subTitle}>Free access to our dashboard</Text>
+          <Gap height={16} />
+          <Label title="Full name" />
+          <Gap height={8} />
+          <TextInput
+            placeholder="John doe"
+            value={form.value}
+            onChange={value => setForm('name', value)}
+          />
+          <Gap height={8} />
+          <Label title="Email Address" />
+          <Gap height={8} />
+          <TextInput
+            placeholder="email@example.com"
+            value={form.email}
+            onChange={value => setForm('email', value)}
+          />
+          <Gap height={8} />
+          <Label title="Role" />
+          <Gap height={8} />
+          <TextInput
+            placeholder=""
+            value={form.role}
+            onChange={value => setForm('role', value)}
+          />
+          <Gap height={8} />
+          <Label title="Department" />
+          <Gap height={8} />
+          <TextInput
+            placeholder=""
+            value={form.department}
+            onChange={value => setForm('department', value)}
+          />
+          <Gap height={8} />
+          <Label title="Password" />
+          <Gap height={8} />
+          <TextInput
+            secureTextEntry
+            placeholder="******************"
+            value={form.password}
+            onChange={value => setForm('password', value)}
+          />
+          <Gap height={8} />
+          <View style={styles.wrapperCheck}>
+            <CheckBox />
+            <Gap width={6} />
+            <Label title="I accepted the " />
+            <Label type="password" subTitle="Termns and Conditions" />
+          </View>
+          <Gap height={48} />
+          <Button title="Sign Up" onPress={onSubmit} />
         </View>
-        <Gap height={48} />
-        <Button
-          title="Sign Up"
-          onPress={() => navigation.replace('Verification')}
-        />
-      </View>
 
-      <View style={styles.wrapperLink}>
-        <Text style={styles.titleOr}>Don't have an account yet? </Text>
-        <Link
-          title="Sign in here"
-          onPress={() => navigation.navigate('SignIn')}
-        />
-      </View>
+        <View style={styles.wrapperLink}>
+          <Text style={styles.titleOr}>Don't have an account yet? </Text>
+          <Link
+            title="Sign in here"
+            onPress={() => navigation.navigate('SignIn')}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -99,6 +138,7 @@ const styles = StyleSheet.create({
     top: 3,
   },
   wrapperLink: {
+    marginTop: 24,
     flexDirection: 'row',
     justifyContent: 'center',
   },
