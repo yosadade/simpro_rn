@@ -12,6 +12,8 @@ import Divider from './Divider';
 import CardDetail from './CardDetail';
 import CustomModal from './CustomModal';
 import Dropdown from './Dropdown';
+import Select from './Select';
+import Loading from './Loading';
 
 export {
   Button,
@@ -28,4 +30,6 @@ export {
   CardDetail,
   CustomModal,
   Dropdown,
+  Select,
+  Loading,
 };

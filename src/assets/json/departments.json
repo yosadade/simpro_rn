@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "label" : "Agensi",
+        "value": "agensi"
+    },
+    {
+        "id": 2,
+        "label" : "Woowa",
+        "value": "woowa"
+    },
+    {
+        "id": 3,
+        "label" : "Yayasan",
+        "value": "yayasan"
+    },
+    {
+        "id": 4,
+        "label" : "Satu Daun",
+        "value": "satu daun"
+    }
+]

@@ -9,6 +9,8 @@ const TextInput = ({
   disable,
   secureTextEntry,
   type,
+  value,
+  onChangeText,
   ...restProps
 }) => {
   return (
@@ -19,6 +21,8 @@ const TextInput = ({
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
         style={styles.input}
+        onChangeText={onChangeText}
+        value={value}
       />
     </View>
   );

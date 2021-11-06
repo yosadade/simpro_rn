@@ -1,28 +1,53 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Button, CheckBox, Gap, Label, Link, TextInput} from '../../components';
-import {colors, fonts} from '../../utils';
+import {
+  Button,
+  CheckBox,
+  Gap,
+  Label,
+  Link,
+  Select,
+  TextInput,
+} from '../../components';
+import {API_HOST, colors, fonts} from '../../utils';
 import useForm from '../../utils/userForm';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {JSONDepartments, JSONRoles} from '../../assets/json';
+import axios from 'axios';
 
 const SignUp = ({navigation}) => {
   const [form, setForm] = useForm({
     name: '',
     email: '',
-    role: '',
-    department: '',
+    role: 'dev',
+    department: 'agensi',
     password: '',
   });
 
   const dispatch = useDispatch();
+  const registerReducer = useSelector(state => state.registerReducer);
 
   const onSubmit = () => {
-    dispatch({type: 'SET_REGISTER', value: form});
+    dispatch({type: 'SET_LOADING', value: true});
+    // const data = {
+    //   ...form,
+    // };
+    // axios
+    //   .post(`${API_HOST.uri}/users`, data)
+    //   .then(res => {
+    //     console.log(res);
+    //     navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
+    //   })
+    //   .catch(err => {
+    //     console.log(err.message);
+    //   });
   };
 
   return (
     <View style={styles.page}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.scrollView}>
         <View>
           <Text style={styles.title}>Create your account</Text>
           <Text style={styles.subTitle}>Free access to our dashboard</Text>
@@ -32,7 +57,7 @@ const SignUp = ({navigation}) => {
           <TextInput
             placeholder="John doe"
             value={form.value}
-            onChange={value => setForm('name', value)}
+            onChangeText={value => setForm('name', value)}
           />
           <Gap height={8} />
           <Label title="Email Address" />
@@ -40,23 +65,23 @@ const SignUp = ({navigation}) => {
           <TextInput
             placeholder="email@example.com"
             value={form.email}
-            onChange={value => setForm('email', value)}
+            onChangeText={value => setForm('email', value)}
           />
           <Gap height={8} />
           <Label title="Role" />
           <Gap height={8} />
-          <TextInput
-            placeholder=""
+          <Select
+            data={JSONRoles}
             value={form.role}
-            onChange={value => setForm('role', value)}
+            onSelectChange={value => setForm('role', value)}
           />
           <Gap height={8} />
           <Label title="Department" />
           <Gap height={8} />
-          <TextInput
-            placeholder=""
+          <Select
+            data={JSONDepartments}
             value={form.department}
-            onChange={value => setForm('department', value)}
+            onSelectChange={value => setForm('department', value)}
           />
           <Gap height={8} />
           <Label title="Password" />
@@ -65,7 +90,7 @@ const SignUp = ({navigation}) => {
             secureTextEntry
             placeholder="******************"
             value={form.password}
-            onChange={value => setForm('password', value)}
+            onChangeText={value => setForm('password', value)}
           />
           <Gap height={8} />
           <View style={styles.wrapperCheck}>
@@ -93,6 +118,9 @@ const SignUp = ({navigation}) => {
 export default SignUp;
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flexGrow: 1,
+  },
   page: {
     flex: 1,
     padding: 24,
