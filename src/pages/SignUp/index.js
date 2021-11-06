@@ -14,6 +14,7 @@ import {API_HOST, colors, fonts, showMessage} from '../../utils';
 import useForm from '../../utils/userForm';
 import {useDispatch, useSelector} from 'react-redux';
 import {JSONDepartments, JSONRoles} from '../../assets/json';
+import {setLoading, signUpAction} from '../../redux/actions';
 
 const SignUp = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -28,17 +29,19 @@ const SignUp = ({navigation}) => {
   const registerReducer = useSelector(state => state.registerReducer);
 
   const onSubmit = () => {
-    // dispatch({type: 'SET_LOADING', value: true});
+    // dispatch(setLoading(true));
     const data = {
       ...form,
     };
+    console.log(form)
+    dispatch(signUpAction(form, navigation));
     Axios.post(`${API_HOST.uri}/users`, data)
       .then(() => {
-        dispatch({type: 'SET_LOADING', value: false});
+        dispatch(setLoading(false));
         navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
       })
       .catch(err => {
-        dispatch({type: 'SET_LOADING', value: false});
+        dispatch(setLoading(false));
         showMessage(`${err?.message}`);
       });
   };

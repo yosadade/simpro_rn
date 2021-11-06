@@ -1,16 +1,17 @@
-import axios from 'axios';
-import {API_HOST} from '../../utils';
+import Axios from 'axios';
+import {setLoading} from '.';
+import {API_HOST, showMessage} from '../../utils';
 
 export const signUpAction =
   ({dataRegister, navigation}) =>
   dispatch => {
-    axios
-      .post(`${API_HOST.uri}/users`, dataRegister)
-      .then(res => {
-        console.log('berhasil register!!');
-        console.log(res.data);
+    Axios.post(`${API_HOST.uri}/users`, dataRegister)
+      .then(() => {
+        dispatch(setLoading(false));
+        navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
       })
       .catch(err => {
-        console.log(err);
+        dispatch(setLoading(false));
+        showMessage(`${err?.message}`);
       });
   };
