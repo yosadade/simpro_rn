@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import FlashMessage from 'react-native-flash-message';
 import {Provider, useSelector} from 'react-redux';
 import Routers from './routes';
 import store from './redux/store';
@@ -10,6 +11,7 @@ const MainApp = () => {
   return (
     <NavigationContainer>
       <Routers />
+      <FlashMessage position="top" />
       {isLoading && <Loading />}
     </NavigationContainer>
   );

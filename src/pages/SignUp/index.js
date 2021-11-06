@@ -9,11 +9,11 @@ import {
   Select,
   TextInput,
 } from '../../components';
-import {API_HOST, colors, fonts} from '../../utils';
+import Axios from 'axios';
+import {API_HOST, colors, fonts, showMessage} from '../../utils';
 import useForm from '../../utils/userForm';
 import {useDispatch, useSelector} from 'react-redux';
 import {JSONDepartments, JSONRoles} from '../../assets/json';
-import axios from 'axios';
 
 const SignUp = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -28,19 +28,19 @@ const SignUp = ({navigation}) => {
   const registerReducer = useSelector(state => state.registerReducer);
 
   const onSubmit = () => {
-    dispatch({type: 'SET_LOADING', value: true});
-    // const data = {
-    //   ...form,
-    // };
-    // axios
-    //   .post(`${API_HOST.uri}/users`, data)
-    //   .then(res => {
-    //     console.log(res);
-    //     navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
-    //   })
-    //   .catch(err => {
-    //     console.log(err.message);
-    //   });
+    // dispatch({type: 'SET_LOADING', value: true});
+    const data = {
+      ...form,
+    };
+    Axios.post(`${API_HOST.uri}/users`, data)
+      .then(() => {
+        dispatch({type: 'SET_LOADING', value: false});
+        navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
+      })
+      .catch(err => {
+        dispatch({type: 'SET_LOADING', value: false});
+        showMessage(`${err?.message}`);
+      });
   };
 
   return (
