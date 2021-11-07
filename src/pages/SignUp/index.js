@@ -9,10 +9,9 @@ import {
   Select,
   TextInput,
 } from '../../components';
-import Axios from 'axios';
-import {API_HOST, colors, fonts, showMessage} from '../../utils';
+import {colors, fonts} from '../../utils';
 import useForm from '../../utils/userForm';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {JSONDepartments, JSONRoles} from '../../assets/json';
 import {setLoading, signUpAction} from '../../redux/actions';
 
@@ -26,7 +25,6 @@ const SignUp = ({navigation}) => {
   });
 
   const dispatch = useDispatch();
-  const registerReducer = useSelector(state => state.registerReducer);
 
   const onSubmit = () => {
     dispatch(setLoading(true));

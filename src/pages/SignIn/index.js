@@ -1,9 +1,24 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {Button, CheckBox, Gap, Label, Link, TextInput} from '../../components';
+import {setLoading, signInAction} from '../../redux/actions';
 import {colors, fonts} from '../../utils';
+import useForm from '../../utils/userForm';
 
 const SignUp = ({navigation}) => {
+  const [form, setForm] = useForm({
+    email: '',
+    password: '',
+  });
+
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    dispatch(setLoading(true));
+    dispatch(signInAction(form, navigation));
+  };
+
   return (
     <View style={styles.page}>
       <View>
@@ -23,7 +38,11 @@ const SignUp = ({navigation}) => {
       <View>
         <Label title="Email Address" />
         <Gap height={8} />
-        <TextInput placeholder="name@example.com" />
+        <TextInput
+          placeholder="name@example.com"
+          value={form.email}
+          onChangeText={value => setForm('email', value)}
+        />
         <Gap height={8} />
         <Label
           title="Password"
@@ -32,7 +51,11 @@ const SignUp = ({navigation}) => {
           onPress={() => navigation.navigate('ForgotPassword')}
         />
         <Gap height={8} />
-        <TextInput placeholder="********************" />
+        <TextInput
+          placeholder="********************"
+          value={form.password}
+          onChangeText={value => setForm('password', value)}
+        />
         <Gap height={8} />
         <View style={styles.wrapperCheck}>
           <CheckBox />
@@ -40,7 +63,7 @@ const SignUp = ({navigation}) => {
           <Label title="Remember me" />
         </View>
         <Gap height={48} />
-        <Button title="Sign In" onPress={() => navigation.replace('MainApp')} />
+        <Button title="Sign In" onPress={onSubmit} />
       </View>
 
       <View>
