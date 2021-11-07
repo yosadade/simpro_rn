@@ -20,6 +20,12 @@ const Profile = () => {
       });
   }, []);
 
+  // const onSignOut = () => {
+  //   AsyncStorage.multiRemove(['userProfile', 'token']).then(() => {
+  //     navigation.reset({index: 0, routes: [{name: 'SignIn'}]})
+  //   })
+  // }
+
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
