@@ -29,21 +29,12 @@ const SignUp = ({navigation}) => {
   const registerReducer = useSelector(state => state.registerReducer);
 
   const onSubmit = () => {
-    // dispatch(setLoading(true));
+    dispatch(setLoading(true));
     const data = {
       ...form,
     };
-    console.log(form)
-    dispatch(signUpAction(form, navigation));
-    Axios.post(`${API_HOST.uri}/users`, data)
-      .then(() => {
-        dispatch(setLoading(false));
-        navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
-      })
-      .catch(err => {
-        dispatch(setLoading(false));
-        showMessage(`${err?.message}`);
-      });
+    console.log(form);
+    dispatch(signUpAction(data, navigation));
   };
 
   return (

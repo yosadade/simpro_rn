@@ -1,10 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {Gap} from '..';
 import {ICNotification, ILProfile} from '../../../assets';
-import {fonts} from '../../../utils';
+import {fonts, getData} from '../../../utils';
 
 const Profile = () => {
+  const [names, setNames] = useState('Name');
+  const [roles, setRoles] = useState('role');
+
+  useEffect(() => {
+    getData('userProfile')
+      .then(res => {
+        const {name, role} = res;
+        setNames(name);
+        setRoles(role);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
@@ -13,8 +28,8 @@ const Profile = () => {
         </View>
         <Gap width={8} />
         <View style={styles.wrapperName}>
-          <Text style={styles.name}>Dylan Hunter</Text>
-          <Text style={styles.role}>Project Manager</Text>
+          <Text style={styles.name}>{names}</Text>
+          <Text style={styles.role}>{roles}</Text>
         </View>
       </View>
       <TouchableOpacity style={styles.icon}>
@@ -60,12 +75,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.primary[700],
     color: '#212529',
+    textTransform: 'capitalize',
   },
   role: {
     fontSize: 12,
     marginTop: 4,
     fontFamily: fonts.primary.normal,
     color: '#212529',
+    textTransform: 'capitalize',
   },
   icon: {
     padding: 12,
@@ -75,6 +92,6 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 40,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
