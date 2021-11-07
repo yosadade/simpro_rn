@@ -1,15 +1,26 @@
-import React, {useState} from 'react';
+/* eslint-disable no-shadow */
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {fonts} from '../../../utils';
+import {colors, fonts} from '../../../utils';
 import {ProgressBar, Gap} from '../../../components';
 import {ICCheckRound, ICUnCheckBig, ICUnCheckRound} from '../../../assets';
 import {CustomModal} from '../../atoms';
+import {useDispatch, useSelector} from 'react-redux';
+import {getProjectData, setLoading} from '../../../redux/actions';
 
 const CardProgressProject = () => {
   const [check, setCheck] = useState(false);
   const [modal, setModal] = useState(false);
 
-  const onDailyScrum = () => {
+  const dispatch = useDispatch();
+  const {project} = useSelector(state => state.projectReducer);
+
+  useEffect(() => {
+    dispatch(getProjectData());
+  }, [dispatch]);
+
+  const onDailyScrum = item => {
+    dispatch(setLoading(true));
     setModal(!modal);
     setCheck(!check);
   };
@@ -18,20 +29,28 @@ const CardProgressProject = () => {
     <>
       <View style={styles.container}>
         <Text style={styles.label}>Project Active</Text>
-        <View style={styles.card}>
-          <View style={styles.wrapper}>
-            <Text style={styles.title}>Alusio</Text>
-            <View style={styles.wrapper}>
-              <Text style={styles.title}>87%</Text>
-              <Gap width={6} />
-              <TouchableOpacity style={styles.btn} onPress={onDailyScrum}>
-                {check ? <ICCheckRound /> : <ICUnCheckRound />}
-              </TouchableOpacity>
+        {project.map(item => {
+          const {id, project, progress} = item;
+          return (
+            <View style={styles.card} key={id}>
+              <View style={styles.wrapper}>
+                <Text style={styles.title}>{project}</Text>
+                <View style={styles.wrapper}>
+                  <Text style={styles.title}>{progress}%</Text>
+                  <Gap width={6} />
+                  <TouchableOpacity
+                    style={styles.btn}
+                    onPress={() => onDailyScrum(item)}
+                    disabled={false}>
+                    {check ? <ICCheckRound /> : <ICUnCheckRound />}
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <Gap height={6} />
+              <ProgressBar color={colors.primary} progress={`${progress}%`} />
             </View>
-          </View>
-          <Gap height={6} />
-          <ProgressBar color="#EEE5FF" />
-        </View>
+          );
+        })}
       </View>
       {modal && (
         <CustomModal
