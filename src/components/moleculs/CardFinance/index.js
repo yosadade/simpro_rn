@@ -1,14 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ModalDashboard} from '..';
 import {CustomModal, Dropdown, Gap} from '../..';
 import {ICArrowUp, ICDown, ICEdit, ICTrash, ICTrashBig} from '../../../assets';
 import {fonts} from '../../../utils';
+import {useDispatch, useSelector} from 'react-redux';
+import {getFinanceData} from '../../../redux/actions';
 
 const CardFinance = () => {
   const [modalDelete, setModalDelete] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [detail, setDetail] = useState(false);
+
+  const dispatch = useDispatch();
+  const {finance} = useSelector(state => state.financeReducer);
+
+  useEffect(() => {
+    dispatch(getFinanceData());
+  }, [dispatch]);
+
+  console.log('finance', finance);
 
   const onDelete = () => {
     setModalDelete(!modalDelete);
@@ -26,28 +37,33 @@ const CardFinance = () => {
     <>
       <View style={styles.container}>
         <Text style={styles.label}>Finance</Text>
-        <View style={styles.wrapper}>
-          <View style={styles.wrapperCash}>
-            <View style={styles.image} />
-            <View>
-              <Text style={styles.title}>Cash</Text>
-              <Text style={styles.subTitle}>11.000.000</Text>
+        {finance.map(item => {
+          const {id, akun, value} = item;
+          return (
+            <View style={styles.wrapper} key={id}>
+              <View style={styles.wrapperCash}>
+                <View style={styles.image} />
+                <View>
+                  <Text style={styles.title}>{akun}</Text>
+                  <Text style={styles.subTitle}>1{value}</Text>
+                </View>
+              </View>
+              <View style={styles.wrapperBtn}>
+                <TouchableOpacity style={styles.btn} onPress={onEdit}>
+                  <ICEdit />
+                </TouchableOpacity>
+                <Gap width={8} />
+                <TouchableOpacity style={styles.btn} onPress={onDelete}>
+                  <ICTrash />
+                </TouchableOpacity>
+                <Gap width={8} />
+                <TouchableOpacity style={styles.btnArrow} onPress={onDetail}>
+                  {detail ? <ICDown /> : <ICArrowUp />}
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-          <View style={styles.wrapperBtn}>
-            <TouchableOpacity style={styles.btn} onPress={onEdit}>
-              <ICEdit />
-            </TouchableOpacity>
-            <Gap width={8} />
-            <TouchableOpacity style={styles.btn} onPress={onDelete}>
-              <ICTrash />
-            </TouchableOpacity>
-            <Gap width={8} />
-            <TouchableOpacity style={styles.btnArrow} onPress={onDetail}>
-              {detail ? <ICDown /> : <ICArrowUp />}
-            </TouchableOpacity>
-          </View>
-        </View>
+          );
+        })}
         <Gap height={12} />
         {detail && <Dropdown />}
       </View>

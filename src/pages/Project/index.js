@@ -10,6 +10,7 @@ import {
 
 const Project = ({navigation}) => {
   const [modalCreate, setModalCreate] = useState(false);
+
   return (
     <>
       <View style={styles.page}>
@@ -20,8 +21,8 @@ const Project = ({navigation}) => {
             placeholder="Search"
             onPress={() => setModalCreate(!modalCreate)}
           />
-          <Gap height={24} />
           <CardProject onPress={() => navigation.navigate('DetailProject')} />
+          <Gap height={24} />
         </ScrollView>
       </View>
       <ModalProject

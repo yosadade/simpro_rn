@@ -1,5 +1,9 @@
+/* eslint-disable no-shadow */
 import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import moment from 'moment';
+import 'moment/locale/id';
 import {ModalProject} from '..';
 import {CustomModal, Divider, Gap, ProgressBar} from '../..';
 import {
@@ -19,74 +23,109 @@ import {fonts} from '../../../utils';
 const CardProject = ({onPress}) => {
   const [modalEdit, setModalEdit] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
+
+  const {project} = useSelector(state => state.projectReducer);
+
   return (
     <>
-      <TouchableOpacity style={styles.container} onPress={onPress}>
-        <View style={styles.wrapper}>
-          <Text style={styles.label}>Alusio</Text>
-          <View style={styles.wrapperBtn}>
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() => setModalEdit(!modalEdit)}>
-              <ICEdit />
-            </TouchableOpacity>
-            <Gap width={8} />
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() => setModalDelete(!modalDelete)}>
-              <ICTrash />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <Gap height={12} />
-        <View style={styles.wrapperProfile}>
-          <View style={styles.wrapperImage}>
-            <Image source={ILProfile} style={styles.image} />
-          </View>
-          <View style={styles.wrapperImageSecond}>
-            <Image source={ILProfile} style={styles.image} />
-          </View>
-        </View>
-        <Gap height={12} />
-        <View style={styles.wrapper}>
-          <View style={styles.wrapper}>
-            <ICDollar />
-            <Gap width={4} />
-            <Text style={styles.title}>IDR. 12.000.000</Text>
-          </View>
-          <View style={styles.wrapper}>
-            <ICBag />
-            <Gap width={4} />
-            <Text style={styles.title}>Projectly</Text>
-          </View>
-        </View>
-        <Gap height={12} />
-        <View style={styles.wrapper}>
-          <View style={styles.wrapper}>
-            <ICStatus />
-            <Gap width={4} />
-            <Text style={styles.title}>On Going</Text>
-          </View>
-          <View style={styles.wrapper}>
-            <ICHourGlass />
-            <Gap width={4} />
-            <Text style={styles.title}>4 month</Text>
-          </View>
-        </View>
-        <Gap height={24} />
-        <Divider />
-        <Gap height={12} />
-        <View style={styles.wrapper}>
-          <Text style={styles.label}>Progress</Text>
-          <View style={styles.badge}>
-            <ICCLock />
-            <Gap width={4} />
-            <Text style={styles.title}>35 Days Left</Text>
-          </View>
-        </View>
-        <Gap height={12} />
-        <ProgressBar color="#F19828" />
-      </TouchableOpacity>
+      {project.map(item => {
+        const {id, project, model, status, progress, value, start, timeline} =
+          item;
+
+        const todayDate = new Date().toISOString().slice(0, 10);
+        const oneDay = 24 * 60 * 60 * 1000;
+        const firstDate = new Date(todayDate);
+        const secondDate = new Date(timeline);
+        const diffDays = Math.round(
+          Math.abs((firstDate - secondDate) / oneDay),
+        );
+
+        const startDate = new Date(start);
+        const endDate = new Date(timeline);
+        const totalDays = Math.round(Math.abs((startDate - endDate) / oneDay));
+        const diffStartAndToday = Math.round(
+          Math.abs((startDate - new Date()) / oneDay),
+        );
+
+        const percentage = (diffStartAndToday / totalDays) * 100;
+
+        const whenExpired = endDate.getTime() < new Date().getTime();
+
+        return (
+          <TouchableOpacity style={styles.container} onPress={onPress} key={id}>
+            <View style={styles.wrapper}>
+              <Text style={styles.label}>{project}</Text>
+              <View style={styles.wrapperBtn}>
+                <TouchableOpacity
+                  style={styles.btn}
+                  onPress={() => setModalEdit(!modalEdit)}>
+                  <ICEdit />
+                </TouchableOpacity>
+                <Gap width={8} />
+                <TouchableOpacity
+                  style={styles.btn}
+                  onPress={() => setModalDelete(!modalDelete)}>
+                  <ICTrash />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <Gap height={12} />
+            <View style={styles.wrapperProfile}>
+              <View style={styles.wrapperImage}>
+                <Image source={ILProfile} style={styles.image} />
+              </View>
+              <View style={styles.wrapperImageSecond}>
+                <Image source={ILProfile} style={styles.image} />
+              </View>
+            </View>
+            <Gap height={12} />
+            <View style={styles.wrapper}>
+              <View style={styles.wrapper}>
+                <ICDollar />
+                <Gap width={4} />
+                <Text style={styles.title}>IDR {value}</Text>
+              </View>
+              <View style={styles.wrapper}>
+                <ICBag />
+                <Gap width={4} />
+                <Text style={styles.title}>{model}</Text>
+              </View>
+            </View>
+            <Gap height={12} />
+            <View style={styles.wrapper}>
+              <View style={styles.wrapper}>
+                <ICStatus />
+                <Gap width={4} />
+                <Text style={styles.title}>{status}</Text>
+              </View>
+              <View style={styles.wrapper}>
+                <ICHourGlass />
+                <Gap width={4} />
+                <Text style={styles.title}>4 month</Text>
+              </View>
+            </View>
+            <Gap height={24} />
+            <Divider />
+            <Gap height={12} />
+            <View style={styles.wrapper}>
+              <Text style={styles.label}>Progress</Text>
+              <View style={styles.badge}>
+                <ICCLock />
+                <Gap width={4} />
+                <Text style={styles.title}>
+                  {whenExpired
+                    ? 'Expired'
+                    : diffDays >= 31
+                    ? `${Math.round(diffDays / 30)} Month Left`
+                    : `${diffDays} Days Left`}
+                </Text>
+              </View>
+            </View>
+            <Gap height={12} />
+            <ProgressBar color="#F19828" progress={progress} />
+          </TouchableOpacity>
+        );
+      })}
       {modalDelete && (
         <CustomModal
           label="Delete item Permanently?"
@@ -115,6 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     marginHorizontal: 24,
+    marginTop: 24,
     paddingVertical: 24,
     paddingHorizontal: 12,
     borderRadius: 4,

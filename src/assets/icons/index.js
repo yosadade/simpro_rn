@@ -29,11 +29,11 @@ import ICChartPie from './chart-pie.svg';
 import ICChartLine from './chart-line.svg';
 import ICPlusCircle from './plus-circle.svg';
 import ICClipboardPink from './clipboard-notes-pink.svg';
-import ICBuilding from './building.svg'
-import ICDown from './angle-down.svg'
-import ICCancel from './times.svg'
+import ICBuilding from './building.svg';
+import ICDown from './angle-down.svg';
+import ICCancel from './times.svg';
 import ICUnCheckBig from './uncheck-big.svg';
-import ICTrashBig from './trash-alt-big.svg'
+import ICTrashBig from './trash-alt-big.svg';
 
 export {
   ICLogo,

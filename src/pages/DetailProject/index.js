@@ -10,7 +10,7 @@ import {ICBack} from '../../assets';
 import {CardDetail, CardProject, Gap} from '../../components';
 import {fonts} from '../../utils';
 
-const DetailProject = ({navigation}) => {
+const DetailProject = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -23,8 +23,8 @@ const DetailProject = ({navigation}) => {
           <Gap width={12} />
           <Text style={styles.title}>Alusio</Text>
         </View>
-        <Gap height={24} />
-        <CardProject />
+        {/* <Gap height={24} />
+        <CardProject /> */}
         <Gap height={24} />
         <CardDetail
           label="Project Informations"
