@@ -11,7 +11,8 @@ const SearchBar = ({
   disable,
   secureTextEntry,
   type,
-  onPress,
+  onCreate,
+  onSearch,
   ...restProps
 }) => {
   return (
@@ -22,12 +23,13 @@ const SearchBar = ({
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
         style={styles.input}
+        onChangeText={onSearch}
       />
       <TouchableOpacity style={styles.icon}>
         <ICSearch />
       </TouchableOpacity>
       <Gap width={12} />
-      <TouchableOpacity style={styles.btn} onPress={onPress}>
+      <TouchableOpacity style={styles.btn} onPress={onCreate}>
         <ICPlusCircle />
       </TouchableOpacity>
     </View>

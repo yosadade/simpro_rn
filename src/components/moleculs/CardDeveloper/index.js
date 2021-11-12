@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ICArrowUp} from '../../../assets';
 import {fonts} from '../../../utils';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const CardDeveloper = () => {
   const [viewDev, setViewDev] = useState(null);

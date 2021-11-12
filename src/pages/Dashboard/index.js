@@ -1,5 +1,6 @@
-import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView, StyleSheet, View, RefreshControl} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {
   CardDeveloper,
   CardFinance,
@@ -8,11 +9,26 @@ import {
   Gap,
   Profile,
 } from '../../components';
+import {getProjectData} from '../../redux/actions';
 
 const Dashboard = () => {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    dispatch(getProjectData());
+    setRefreshing(false);
+  };
+
   return (
     <View style={styles.page}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <Profile />
         <Gap height={24} />
         <CardProjectProgress />

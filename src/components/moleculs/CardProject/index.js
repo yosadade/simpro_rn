@@ -1,8 +1,6 @@
 /* eslint-disable no-shadow */
 import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useSelector} from 'react-redux';
-import moment from 'moment';
 import 'moment/locale/id';
 import {ModalProject} from '..';
 import {CustomModal, Divider, Gap, ProgressBar} from '../..';
@@ -20,15 +18,13 @@ import {
 } from '../../../assets';
 import {fonts} from '../../../utils';
 
-const CardProject = ({onPress}) => {
+const CardProject = ({onPress, data}) => {
   const [modalEdit, setModalEdit] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
 
-  const {project} = useSelector(state => state.projectReducer);
-
   return (
     <>
-      {project.map(item => {
+      {data.map(item => {
         const {id, project, model, status, progress, value, start, timeline} =
           item;
 

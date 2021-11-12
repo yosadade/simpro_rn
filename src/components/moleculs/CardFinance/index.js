@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import NumberFormat from 'react-number-format';
 import {ModalDashboard} from '..';
 import {CustomModal, Dropdown, Gap} from '../..';
 import {ICArrowUp, ICDown, ICEdit, ICTrash, ICTrashBig} from '../../../assets';
@@ -45,7 +46,16 @@ const CardFinance = () => {
                 <View style={styles.image} />
                 <View>
                   <Text style={styles.title}>{akun}</Text>
-                  <Text style={styles.subTitle}>1{value}</Text>
+                  <NumberFormat
+                    value={value}
+                    className="foo"
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'IDR '}
+                    renderText={values => (
+                      <Text style={styles.subTitle}>{values}</Text>
+                    )}
+                  />
                 </View>
               </View>
               <View style={styles.wrapperBtn}>
