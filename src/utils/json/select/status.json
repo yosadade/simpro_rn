@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "label": "On Going",
+        "value": "On Going"
+    },
+    {
+        "id": 2,
+        "label": "On Hold",
+        "value": "On Hold"
+    },
+    {
+        "id": 3,
+        "label": "Maintenance",
+        "value": "Maintenance"
+    },
+    {
+        "id": 4,
+        "label": "Prospek",
+        "value": "Prospek"
+    },
+    {
+        "id": 5,
+        "label": "Completed",
+        "value": "Completed"
+    }
+]

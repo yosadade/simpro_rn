@@ -8,7 +8,7 @@ import {
   Profile,
   SearchBar,
 } from '../../components';
-import {getProjectData} from '../../redux/actions';
+import {getProjectData, setLoading} from '../../redux/actions';
 
 const Project = ({navigation}) => {
   const [modalCreate, setModalCreate] = useState(false);
@@ -28,7 +28,15 @@ const Project = ({navigation}) => {
     setRefreshing(false);
   };
 
+  const onCreate = () => {
+    setModalCreate(!modalCreate);
+  };
+
   const sliceDataProject = project.slice(0, 9);
+
+  if (project.length <= 5) {
+    return dispatch(setLoading(true));
+  }
 
   return (
     <>
@@ -43,7 +51,7 @@ const Project = ({navigation}) => {
           <SearchBar
             placeholder="Search"
             onSearch={value => setSearch(value)}
-            onCreate={() => setModalCreate(!modalCreate)}
+            onCreate={onCreate}
           />
           {project.length <= 10 ? (
             <CardProject

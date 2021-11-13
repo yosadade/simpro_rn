@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "label": "Projectly",
+        "value": "projectly"
+    },
+    {
+        "id": 2,
+        "label": "Dev Sharing",
+        "value": "dev sharing"
+    },
+    {
+        "id": 3,
+        "label": "Start Up",
+        "value": "start up"
+    },
+    {
+        "id": 4,
+        "label": "Taskly",
+        "value": "taskly"
+    },
+    {
+        "id": 5,
+        "label": "Hourly",
+        "value": "hourly"
+    }
+]
