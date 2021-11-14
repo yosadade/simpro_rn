@@ -1,7 +1,15 @@
 /* eslint-disable no-shadow */
 import React, {useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  View,
+} from 'react-native';
 import 'moment/locale/id';
+import {useDispatch} from 'react-redux';
 import {ModalProject} from '..';
 import {CustomModal, Divider, Gap, ProgressBar} from '../..';
 import {
@@ -17,16 +25,35 @@ import {
   ILProfile,
 } from '../../../assets';
 import {fonts} from '../../../utils';
+import {getProjectData} from '../../../redux/actions';
+import {useNavigation} from '@react-navigation/native';
 
-const CardProject = ({onPress, data}) => {
+const CardProject = ({ListHeaderComponent, data}) => {
   const [modalEdit, setModalEdit] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    dispatch(getProjectData());
+    setRefreshing(false);
+  };
 
   return (
-    <>
-      {data.map(item => {
+    <FlatList
+      data={data}
+      ListHeaderComponent={ListHeaderComponent}
+      showsVerticalScrollIndicator={false}
+      initialNumToRender={5}
+      keyExtractor={item => item.id}
+      refreshing={refreshing}
+      onRefresh={onRefresh}
+      renderItem={item => {
         const {id, project, model, status, progress, value, start, timeline} =
-          item;
+          item.item;
 
         const todayDate = new Date().toISOString().slice(0, 10);
         const oneDay = 24 * 60 * 60 * 1000;
@@ -48,98 +75,103 @@ const CardProject = ({onPress, data}) => {
         const whenExpired = endDate.getTime() < new Date().getTime();
 
         return (
-          <TouchableOpacity style={styles.container} onPress={onPress} key={id}>
-            <View style={styles.wrapper}>
-              <Text style={styles.label}>{project}</Text>
-              <View style={styles.wrapperBtn}>
-                <TouchableOpacity
-                  style={styles.btn}
-                  onPress={() => setModalEdit(!modalEdit)}>
-                  <ICEdit />
-                </TouchableOpacity>
-                <Gap width={8} />
-                <TouchableOpacity
-                  style={styles.btn}
-                  onPress={() => setModalDelete(!modalDelete)}>
-                  <ICTrash />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <Gap height={12} />
-            <View style={styles.wrapperProfile}>
-              <View style={styles.wrapperImage}>
-                <Image source={ILProfile} style={styles.image} />
-              </View>
-              <View style={styles.wrapperImageSecond}>
-                <Image source={ILProfile} style={styles.image} />
-              </View>
-            </View>
-            <Gap height={12} />
-            <View style={styles.wrapper}>
+          <>
+            <TouchableOpacity
+              style={styles.container}
+              onPress={() => navigation.navigate('DetailProject', item)}
+              key={id}>
               <View style={styles.wrapper}>
-                <ICDollar />
-                <Gap width={4} />
-                <Text style={styles.title}>IDR {value}</Text>
+                <Text style={styles.label}>{project}</Text>
+                <View style={styles.wrapperBtn}>
+                  <TouchableOpacity
+                    style={styles.btn}
+                    onPress={() => setModalEdit(!modalEdit)}>
+                    <ICEdit />
+                  </TouchableOpacity>
+                  <Gap width={8} />
+                  <TouchableOpacity
+                    style={styles.btn}
+                    onPress={() => setModalDelete(!modalDelete)}>
+                    <ICTrash />
+                  </TouchableOpacity>
+                </View>
               </View>
+              <Gap height={12} />
+              <View style={styles.wrapperProfile}>
+                <View style={styles.wrapperImage}>
+                  <Image source={ILProfile} style={styles.image} />
+                </View>
+                <View style={styles.wrapperImageSecond}>
+                  <Image source={ILProfile} style={styles.image} />
+                </View>
+              </View>
+              <Gap height={12} />
               <View style={styles.wrapper}>
-                <ICBag />
-                <Gap width={4} />
-                <Text style={styles.title}>{model}</Text>
+                <View style={styles.wrapper}>
+                  <ICDollar />
+                  <Gap width={4} />
+                  <Text style={styles.title}>IDR {value}</Text>
+                </View>
+                <View style={styles.wrapper}>
+                  <ICBag />
+                  <Gap width={4} />
+                  <Text style={styles.title}>{model}</Text>
+                </View>
               </View>
-            </View>
-            <Gap height={12} />
-            <View style={styles.wrapper}>
+              <Gap height={12} />
               <View style={styles.wrapper}>
-                <ICStatus />
-                <Gap width={4} />
-                <Text style={styles.title}>{status}</Text>
+                <View style={styles.wrapper}>
+                  <ICStatus />
+                  <Gap width={4} />
+                  <Text style={styles.title}>{status}</Text>
+                </View>
+                <View style={styles.wrapper}>
+                  <ICHourGlass />
+                  <Gap width={4} />
+                  <Text style={styles.title}>{progress}%</Text>
+                </View>
               </View>
+              <Gap height={24} />
+              <Divider />
+              <Gap height={12} />
               <View style={styles.wrapper}>
-                <ICHourGlass />
-                <Gap width={4} />
-                <Text style={styles.title}>4 month</Text>
+                <Text style={styles.label}>Progress</Text>
+                <View style={styles.badge}>
+                  <ICCLock />
+                  <Gap width={4} />
+                  <Text style={styles.title}>
+                    {whenExpired
+                      ? 'Expired'
+                      : diffDays >= 31
+                      ? `${Math.round(diffDays / 30)} Month Left`
+                      : `${diffDays} Days Left`}
+                  </Text>
+                </View>
               </View>
-            </View>
-            <Gap height={24} />
-            <Divider />
-            <Gap height={12} />
-            <View style={styles.wrapper}>
-              <Text style={styles.label}>Progress</Text>
-              <View style={styles.badge}>
-                <ICCLock />
-                <Gap width={4} />
-                <Text style={styles.title}>
-                  {whenExpired
-                    ? 'Expired'
-                    : diffDays >= 31
-                    ? `${Math.round(diffDays / 30)} Month Left`
-                    : `${diffDays} Days Left`}
-                </Text>
-              </View>
-            </View>
-            <Gap height={12} />
-            <ProgressBar color="#F19828" progress={progress} />
-          </TouchableOpacity>
+              <Gap height={12} />
+              <ProgressBar color="#F19828" progress={`${progress}%`} />
+            </TouchableOpacity>
+            {modalDelete && (
+              <CustomModal
+                label="Delete item Permanently?"
+                title="You can only delete this item permanently"
+                icon={<ICTrashBig />}
+                isVisible={modalDelete}
+                onBackdropPress={() => setModalDelete(!modalDelete)}
+              />
+            )}
+            {modalEdit && (
+              <ModalProject
+                label="Edit Item"
+                icon={<ICUnCheckBig />}
+                isVisible={modalEdit}
+                onBackdropPress={() => setModalEdit(!modalEdit)}
+              />
+            )}
+          </>
         );
-      })}
-      {modalDelete && (
-        <CustomModal
-          label="Delete item Permanently?"
-          title="You can only delete this item permanently"
-          icon={<ICTrashBig />}
-          isVisible={modalDelete}
-          onBackdropPress={() => setModalDelete(!modalDelete)}
-        />
-      )}
-      {modalEdit && (
-        <ModalProject
-          label="Edit Item"
-          icon={<ICUnCheckBig />}
-          isVisible={modalEdit}
-          onBackdropPress={() => setModalEdit(!modalEdit)}
-        />
-      )}
-    </>
+      }}
+    />
   );
 };
 

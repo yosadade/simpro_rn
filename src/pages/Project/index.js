@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, ScrollView, RefreshControl} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  RefreshControl,
+  FlatList,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {
   CardProject,
@@ -8,7 +14,7 @@ import {
   Profile,
   SearchBar,
 } from '../../components';
-import {getProjectData, setLoading} from '../../redux/actions';
+import {getProjectData} from '../../redux/actions';
 
 const Project = ({navigation}) => {
   const [modalCreate, setModalCreate] = useState(false);
@@ -32,40 +38,29 @@ const Project = ({navigation}) => {
     setModalCreate(!modalCreate);
   };
 
-  const sliceDataProject = project.slice(0, 9);
-
-  if (project.length <= 5) {
-    return dispatch(setLoading(true));
-  }
+  const ListHeaderComponent = () => {
+    return (
+      <>
+        <Profile />
+        <Gap height={24} />
+        <SearchBar
+          placeholder="Search"
+          onSearch={value => setSearch(value)}
+          onCreate={onCreate}
+        />
+      </>
+    );
+  };
 
   return (
     <>
       <View style={styles.page}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }>
-          <Profile />
-          <Gap height={24} />
-          <SearchBar
-            placeholder="Search"
-            onSearch={value => setSearch(value)}
-            onCreate={onCreate}
-          />
-          {project.length <= 10 ? (
-            <CardProject
-              data={sliceDataProject}
-              onPress={() => navigation.navigate('DetailProject')}
-            />
-          ) : (
-            <CardProject
-              data={filterDataProject}
-              onPress={() => navigation.navigate('DetailProject')}
-            />
-          )}
-          <Gap height={24} />
-        </ScrollView>
+        <CardProject
+          data={filterDataProject}
+          ListHeaderComponent={ListHeaderComponent}
+          onPress={() => navigation.navigate('DetailProject')}
+        />
+        <Gap height={24} />
       </View>
       <ModalProject
         label="Create Project"

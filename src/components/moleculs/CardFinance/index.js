@@ -20,8 +20,6 @@ const CardFinance = () => {
     dispatch(getFinanceData());
   }, [dispatch]);
 
-  console.log('finance', finance);
-
   const onDelete = () => {
     setModalDelete(!modalDelete);
   };

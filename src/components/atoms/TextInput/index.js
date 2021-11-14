@@ -11,11 +11,13 @@ const TextInput = ({
   type,
   value,
   onChangeText,
+  keyboardType,
   ...restProps
 }) => {
   return (
     <View style={styles.container}>
       <TextInputRN
+        keyboardType={keyboardType}
         style={styles.input}
         editable={!disable}
         secureTextEntry={secureTextEntry}

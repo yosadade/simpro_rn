@@ -18,7 +18,7 @@ const CardDetail = ({
   value4,
 }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <View style={styles.container}>
       <View style={styles.wrapper}>
         <Text style={styles.label}>{label}</Text>
         <TouchableOpacity style={styles.btn}>
@@ -26,11 +26,27 @@ const CardDetail = ({
         </TouchableOpacity>
       </View>
       <Gap height={12} />
-      <Label type="project" title={title1} subTitle={value1} />
-      <Label type="project" title={title2} subTitle={value2} />
-      <Label type="project" title={title3} subTitle={value3} />
-      <Label type="project" title={title4} subTitle={value4} />
-    </TouchableOpacity>
+      <Label
+        type="project"
+        title={title1}
+        subTitle={value1 === null || value1 === '' ? '-' : value1}
+      />
+      <Label
+        type="project"
+        title={title2}
+        subTitle={value2 === null || value2 === '' ? '-' : value2}
+      />
+      <Label
+        type="project"
+        title={title3}
+        subTitle={value3 === null || value3 === '' ? '-' : value3}
+      />
+      <Label
+        type="project"
+        title={title4}
+        subTitle={value4 === null || value4 === '' ? '-' : value4}
+      />
+    </View>
   );
 };
 

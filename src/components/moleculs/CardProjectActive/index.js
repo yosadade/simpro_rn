@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Gap} from '../..';
 import {
   ICArrowUp,
   ICChart,
@@ -8,8 +7,6 @@ import {
   ICChartLine,
   ICChartPie,
   ICCompleted,
-  ICEdit,
-  ICTrash,
 } from '../../../assets';
 import {fonts} from '../../../utils';
 

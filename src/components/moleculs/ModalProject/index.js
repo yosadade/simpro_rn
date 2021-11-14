@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import DatePicker from 'react-native-date-picker';
 import {Button, Gap, Label, Select, TextInput} from '../..';
 import {ICCancel} from '../../../assets';
 import {colors, fonts} from '../../../utils';
@@ -38,7 +39,7 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
     repayment: '',
     date_repayment: '00-00-0000',
     start: '00-00-0000',
-    timeline: '00-00-0000',
+    timeline: '01-01-2021',
     note: '',
     daily_scrum: false,
     portfolio: '',
@@ -61,11 +62,6 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
       isVisible={isVisible}
       onBackdropPress={onBackdropPress}
       style={styles.container}
-      // customBackdrop={
-      //   <TouchableWithoutFeedback onPress={() => setModal(!modal)}>
-      //     <View style={{ flex: 1 }} />
-      //   </TouchableWithoutFeedback>
-      // }
     >
       <View style={styles.modal}>
         <View style={styles.header}>
@@ -85,8 +81,9 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
             <Label title="Nominal" type="project" />
             <Gap height={8} />
             <TextInput
+              keyboardType="numeric"
               value={form.value}
-              onChangeText={value => setForm('project', value)}
+              onChangeText={value => setForm('value', value)}
             />
             <Label title="Status" type="project" />
             <Gap height={8} />

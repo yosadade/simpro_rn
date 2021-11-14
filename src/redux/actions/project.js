@@ -8,7 +8,6 @@ export const getProjectData = () => dispatch => {
       headers: {Authorization: `Bearer ${token}`},
     })
       .then(res => {
-        console.log('get data project', res.data.data);
         const project = res.data.data;
         dispatch({type: 'GET_PROJECT', value: project});
         dispatch(setLoading(false));

@@ -7,10 +7,26 @@ import {
   View,
 } from 'react-native';
 import {ICBack} from '../../assets';
-import {CardDetail, CardProject, Gap} from '../../components';
+import {CardDetail, Gap} from '../../components';
 import {fonts} from '../../utils';
 
 const DetailProject = ({navigation, route}) => {
+  const {
+    project,
+    start,
+    timeline,
+    gitlab,
+    daily_scrum,
+    pm,
+    frontend,
+    backend,
+    designer,
+    group_client,
+    group_developer,
+    gitlab_project_id,
+    group_whatsapp,
+  } = route.params.item;
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -21,7 +37,7 @@ const DetailProject = ({navigation, route}) => {
             <ICBack />
           </TouchableOpacity>
           <Gap width={12} />
-          <Text style={styles.title}>Alusio</Text>
+          <Text style={styles.title}>{project}</Text>
         </View>
         {/* <Gap height={24} />
         <CardProject /> */}
@@ -29,25 +45,25 @@ const DetailProject = ({navigation, route}) => {
         <CardDetail
           label="Project Informations"
           title1="Started"
-          value1="31 October 2021"
+          value1={start}
           title2="Timeline"
-          value2="31 December 2021"
+          value2={timeline}
           title3="Gitlab"
-          value3="Here"
+          value3={gitlab}
           title4="Daily Scrum"
-          value4="Already"
+          value4={daily_scrum ? 'Already' : 'Not Ready'}
         />
         <Gap height={12} />
         <CardDetail
           label="Man Power"
           title1="Project Manager"
-          value1="Dylan Hunter"
+          value1={pm}
           title2="Frontend Dev"
-          value2="Alex Kehl"
+          value2={frontend}
           title3="Backend Dev"
-          value3="Lucas Pitzec"
+          value3={backend}
           title4="Designer"
-          value4="Chris Evans"
+          value4={designer}
         />
         <Gap height={12} />
         <CardDetail
@@ -64,14 +80,14 @@ const DetailProject = ({navigation, route}) => {
         <Gap height={12} />
         <CardDetail
           label="Contact"
-          title1="Telegram"
-          value1="Here"
-          title2="Whatsapp"
-          value2="Here"
+          title1="Group Client"
+          value1={group_client}
+          title2="Group Developer"
+          value2={group_developer}
           title3="Telegram ID"
-          value3="-128388205900"
+          value3={gitlab_project_id}
           title4="Whatsapp ID"
-          value4="1348320340"
+          value4={group_whatsapp}
         />
         <Gap height={24} />
       </ScrollView>
@@ -97,7 +113,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
   },
   title: {
-    fontSize: 23,
+    fontSize: 20,
     color: '#212529',
     fontFamily: fonts.primary[700],
   },
