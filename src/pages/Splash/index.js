@@ -15,7 +15,7 @@ const Splash = ({navigation}) => {
         }
       }, 2000);
     });
-  });
+  }, [navigation]);
 
   return (
     <View style={styles.page}>
