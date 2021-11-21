@@ -8,10 +8,7 @@ import store from './redux/store';
 import {Loading} from './components';
 
 const MainApp = () => {
-  LogBox.ignoreLogs([
-    'Require cycles are allowed, but can result in uninitialized values.',
-    'Non-serializable values were found in the navigation state',
-  ]);
+  LogBox.ignoreAllLogs();
 
   const {isLoading} = useSelector(state => state.globalReducer);
   return (

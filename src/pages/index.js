@@ -8,6 +8,7 @@ import Project from './Project';
 import Employee from './Employee';
 import DetailProject from './DetailProject';
 import DetailEmployee from './DetailEmployee';
+import Profile from './Profile';
 
 export {
   Splash,
@@ -20,4 +21,5 @@ export {
   Employee,
   DetailProject,
   DetailEmployee,
+  Profile,
 };

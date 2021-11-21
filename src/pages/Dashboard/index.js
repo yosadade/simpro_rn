@@ -11,7 +11,7 @@ import {
 } from '../../components';
 import {getProjectData} from '../../redux/actions';
 
-const Dashboard = () => {
+const Dashboard = ({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
 
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Dashboard = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <Profile />
+        <Profile onPress={() => navigation.navigate('Profile')}/>
         <Gap height={24} />
         <CardProjectProgress />
         <Gap height={24} />

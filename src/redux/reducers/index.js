@@ -4,6 +4,7 @@ import {globalReducer} from './global';
 import {projectReducer} from './project';
 import {dailyScrumReducer} from './dailyScrum';
 import {financeReducer} from './finance';
+import {employeeReducer} from './employee';
 
 const reducer = combineReducers({
   registerReducer,
@@ -11,6 +12,7 @@ const reducer = combineReducers({
   projectReducer,
   dailyScrumReducer,
   financeReducer,
+  employeeReducer,
 });
 
 export default reducer;

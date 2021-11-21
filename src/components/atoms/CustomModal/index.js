@@ -1,17 +1,18 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
 import {Button, Gap} from '..';
 import {ICCancel} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const CustomModal = ({label, icon, title, onBackdropPress, isVisible}) => {
+const CustomModal = ({
+  label,
+  icon,
+  title,
+  onBackdropPress,
+  onSubmit,
+  isVisible,
+}) => {
   return (
     <Modal
       swipeDirection="left"
@@ -50,7 +51,12 @@ const CustomModal = ({label, icon, title, onBackdropPress, isVisible}) => {
               onPress={onBackdropPress}
             />
             <Gap width={4} />
-            <Button type="modal" title="Done" bgColor={colors.primary} />
+            <Button
+              type="modal"
+              title="Done"
+              bgColor={colors.primary}
+              onPress={onSubmit}
+            />
           </View>
         </View>
       </View>

@@ -1,12 +1,15 @@
 /* eslint-disable no-shadow */
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {colors, fonts} from '../../../utils';
+import {fonts} from '../../../utils';
 import {ProgressBar, Gap} from '../../../components';
 import {ICCheckRound, ICUnCheckBig, ICUnCheckRound} from '../../../assets';
 import {CustomModal} from '../../atoms';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProjectData, setLoading} from '../../../redux/actions';
+
+const colors = ['#ffc107', '#28a745', '#ffaa8a'];
+const randColor = colors[Math.floor(Math.random() * colors.length)];
 
 const CardProgressProject = () => {
   const [check, setCheck] = useState(false);
@@ -14,6 +17,7 @@ const CardProgressProject = () => {
 
   const dispatch = useDispatch();
   const {project} = useSelector(state => state.projectReducer);
+  const data = project.slice(0, 5);
 
   useEffect(() => {
     dispatch(getProjectData());
@@ -29,7 +33,7 @@ const CardProgressProject = () => {
     <>
       <View style={styles.container}>
         <Text style={styles.label}>Project Active</Text>
-        {project.map(item => {
+        {data.map(item => {
           const {id, project, progress} = item;
           return (
             <View style={styles.card} key={id}>
@@ -47,7 +51,7 @@ const CardProgressProject = () => {
                 </View>
               </View>
               <Gap height={6} />
-              <ProgressBar color={colors.primary} progress={`${progress}%`} />
+              <ProgressBar color="#F19828" progress={`${progress}%`} />
             </View>
           );
         })}

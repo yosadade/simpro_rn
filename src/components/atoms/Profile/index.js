@@ -4,16 +4,18 @@ import {Gap} from '..';
 import {ICNotification, ILProfile} from '../../../assets';
 import {fonts, getData} from '../../../utils';
 
-const Profile = () => {
+const Profile = ({type}) => {
   const [names, setNames] = useState('Name');
   const [roles, setRoles] = useState('role');
+  const [emails, setEmails] = useState('email');
 
   useEffect(() => {
     getData('userProfile')
       .then(res => {
-        const {name, role} = res;
+        const {name, role, email} = res;
         setNames(name);
         setRoles(role);
+        setEmails(email);
       })
       .catch(err => {
         console.log(err);
@@ -27,7 +29,7 @@ const Profile = () => {
   // }
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <View style={styles.profile}>
         <View style={styles.wrapperProfile}>
           <Image source={ILProfile} style={styles.image} />
@@ -35,13 +37,15 @@ const Profile = () => {
         <Gap width={8} />
         <View style={styles.wrapperName}>
           <Text style={styles.name}>{names}</Text>
-          <Text style={styles.role}>{roles}</Text>
+          <Text style={styles.role}>{type === 'profile' ? emails : roles}</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.icon}>
-        <ICNotification />
-      </TouchableOpacity>
-    </View>
+      {type === '' && (
+        <TouchableOpacity style={styles.icon}>
+          <ICNotification />
+        </TouchableOpacity>
+      )}
+    </TouchableOpacity>
   );
 };
 
@@ -54,6 +58,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
     padding: 24,
+    borderColor: '#DEE2E6',
+    borderWidth: 0.5,
   },
   profile: {
     flexDirection: 'row',

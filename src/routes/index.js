@@ -12,6 +12,7 @@ import {
   Employee,
   DetailProject,
   DetailEmployee,
+  Profile,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -34,6 +35,11 @@ const MainApp = () => {
       <Tab.Screen
         name="Employee"
         component={Employee}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
         options={{headerShown: false}}
       />
     </Tab.Navigator>
@@ -76,6 +82,11 @@ const Routers = () => {
       <Stack.Screen
         name="DetailEmployee"
         component={DetailEmployee}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
         options={{headerShown: false}}
       />
       <Stack.Screen

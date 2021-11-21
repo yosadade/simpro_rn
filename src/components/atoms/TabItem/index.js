@@ -5,6 +5,8 @@ import {
   ICEmployeeActive,
   ICHome,
   ICHomeActive,
+  ICProfile,
+  ICProfileActive,
   ICProject,
   ICProjectActive,
 } from '../../../assets';
@@ -19,6 +21,8 @@ const TabItems = ({isFocused, onLongPress, onPress, label}) => {
         return isFocused ? <ICProjectActive /> : <ICProject />;
       case 'Employee':
         return isFocused ? <ICEmployeeActive /> : <ICEmployee />;
+        case 'Profile':
+          return isFocused ? <ICProfileActive /> : <ICProfile />;
       default:
         break;
     }

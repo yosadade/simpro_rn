@@ -1,10 +1,19 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Divider, Gap} from '../..';
-import {ICBuilding, ICClipboardPink, ICCLock, ILProfile} from '../../../assets';
-import {colors, fonts} from '../../../utils';
+import {ICBuilding, ICClipboardPink, ILProfile} from '../../../assets';
+import {fonts} from '../../../utils';
 
-const CardEmployee = ({onPress}) => {
+const CardEmployee = ({
+  onPress,
+  id,
+  name,
+  role,
+  status,
+  department,
+  noWa,
+  start,
+}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.wrapperRole}>
@@ -12,20 +21,16 @@ const CardEmployee = ({onPress}) => {
           <Image source={ILProfile} style={styles.image} />
         </View>
         <Gap height={12} />
-        {/* <View style={styles.badge}> */}
-        <Text style={styles.role}>Project Manager</Text>
+        <Text style={styles.role}>{role}</Text>
         <Gap height={4} />
-        <Text style={styles.id}>Employee id : 0001</Text>
-        {/* </View> */}
+        <Text style={styles.id}>Employee id : 000{id}</Text>
       </View>
       <Gap width={24} />
-      <Divider type="employee" />
-      <Gap width={24} />
       <View style={styles.detail}>
-        <Text style={styles.name}>Luke Short</Text>
+        <Text style={styles.name}>{name}</Text>
         <Gap height={6} />
         <View style={styles.badges}>
-          <Text style={styles.role}>Woowa</Text>
+          <Text style={styles.role}>{status ? 'ACTIVE' : 'NOT ACTIVE'}</Text>
         </View>
         <Gap height={12} />
         <Divider />
@@ -33,13 +38,19 @@ const CardEmployee = ({onPress}) => {
         <View style={styles.wrapper}>
           <ICBuilding />
           <Gap width={4} />
-          <Text style={styles.title}>Agency</Text>
+          <Text style={styles.title}>{department}</Text>
         </View>
         <Gap height={6} />
         <View style={styles.wrapper}>
           <ICClipboardPink />
           <Gap width={4} />
-          <Text style={styles.title}>1.5 Years</Text>
+          <Text style={styles.title}>{noWa}</Text>
+        </View>
+        <Gap height={12} />
+        <View style={styles.wrapper}>
+          <ICBuilding />
+          <Gap width={4} />
+          <Text style={styles.title}>{start}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -57,9 +68,11 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: '#DEE2E6',
+    alignItems: 'center',
   },
   wrapperRole: {
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   wrapperImage: {
     borderColor: '#DEE2E6',
@@ -77,6 +90,9 @@ const styles = StyleSheet.create({
     borderRadius: 70,
   },
   detail: {
+    borderLeftWidth: 0.5,
+    paddingLeft: 24,
+    borderColor: '#DEE2E6',
     justifyContent: 'space-between',
   },
   name: {
@@ -106,6 +122,7 @@ const styles = StyleSheet.create({
   },
   role: {
     fontSize: 11,
+    textTransform: 'capitalize',
     fontFamily: fonts.primary[700],
     color: '#212529',
   },
@@ -122,5 +139,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontFamily: fonts.primary[400],
     color: '#212529',
+    textTransform: 'capitalize',
   },
 });

@@ -34,6 +34,14 @@ import ICDown from './angle-down.svg';
 import ICCancel from './times.svg';
 import ICUnCheckBig from './uncheck-big.svg';
 import ICTrashBig from './trash-alt-big.svg';
+import ICSignOut from './signout.svg';
+import ICUserPlus from './user-plus.svg';
+import ICEditBack from './edit-black';
+import ICLanguage from './language.svg';
+import ICMode from './mode.svg';
+import ICStar from './star.svg';
+import ICProfile from './user.svg';
+import ICProfileActive from './profile-active.svg';
 
 export {
   ICLogo,
@@ -72,4 +80,12 @@ export {
   ICCancel,
   ICUnCheckBig,
   ICTrashBig,
+  ICSignOut,
+  ICUserPlus,
+  ICEditBack,
+  ICLanguage,
+  ICMode,
+  ICStar,
+  ICProfile,
+  ICProfileActive,
 };

@@ -39,41 +39,54 @@ const CardFinance = () => {
         {finance.map(item => {
           const {id, akun, value} = item;
           return (
-            <View style={styles.wrapper} key={id}>
-              <View style={styles.wrapperCash}>
-                <View style={styles.image} />
-                <View>
-                  <Text style={styles.title}>{akun}</Text>
-                  <NumberFormat
-                    value={value}
-                    className="foo"
-                    displayType={'text'}
-                    thousandSeparator={true}
-                    prefix={'IDR '}
-                    renderText={values => (
-                      <Text style={styles.subTitle}>{values}</Text>
-                    )}
-                  />
+            <View key={id}>
+              <View style={styles.wrapper} >
+                <View style={styles.wrapperCash}>
+                  <View style={styles.image} />
+                  <View>
+                    <Text style={styles.title}>{akun}</Text>
+                    <NumberFormat
+                      value={value}
+                      className="foo"
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'IDR '}
+                      renderText={values => (
+                        <Text style={styles.subTitle}>{values}</Text>
+                      )}
+                    />
+                  </View>
+                </View>
+                <View style={styles.wrapperBtn}>
+                  <TouchableOpacity style={styles.btn} onPress={onEdit}>
+                    <ICEdit />
+                  </TouchableOpacity>
+                  {akun === 'Piutang' || akun === 'Est. Income' ? (
+                    <>
+                      <Gap width={8} />
+                      <TouchableOpacity style={styles.btn} onPress={onDelete}>
+                        <ICTrash />
+                      </TouchableOpacity>
+                      <Gap width={8} />
+                      <TouchableOpacity
+                        style={styles.btnArrow}
+                        onPress={onDetail}>
+                        {detail ? <ICDown /> : <ICArrowUp />}
+                      </TouchableOpacity>
+                    </>
+                  ) : null}
                 </View>
               </View>
-              <View style={styles.wrapperBtn}>
-                <TouchableOpacity style={styles.btn} onPress={onEdit}>
-                  <ICEdit />
-                </TouchableOpacity>
-                <Gap width={8} />
-                <TouchableOpacity style={styles.btn} onPress={onDelete}>
-                  <ICTrash />
-                </TouchableOpacity>
-                <Gap width={8} />
-                <TouchableOpacity style={styles.btnArrow} onPress={onDetail}>
-                  {detail ? <ICDown /> : <ICArrowUp />}
-                </TouchableOpacity>
-              </View>
+              <Gap height={12} />
+              {detail && (
+                <>
+                  <Gap height={12} />
+                  <Dropdown />
+                </>
+              )}
             </View>
           );
         })}
-        <Gap height={12} />
-        {detail && <Dropdown />}
       </View>
       {modalDelete && (
         <CustomModal
