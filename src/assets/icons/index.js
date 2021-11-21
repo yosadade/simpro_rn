@@ -42,6 +42,7 @@ import ICMode from './mode.svg';
 import ICStar from './star.svg';
 import ICProfile from './user.svg';
 import ICProfileActive from './profile-active.svg';
+import ICSignOutBig from './signout-big.svg';
 
 export {
   ICLogo,
@@ -88,4 +89,5 @@ export {
   ICStar,
   ICProfile,
   ICProfileActive,
+  ICSignOutBig,
 };

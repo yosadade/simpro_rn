@@ -22,12 +22,6 @@ const Profile = ({type}) => {
       });
   }, []);
 
-  // const onSignOut = () => {
-  //   AsyncStorage.multiRemove(['userProfile', 'token']).then(() => {
-  //     navigation.reset({index: 0, routes: [{name: 'SignIn'}]})
-  //   })
-  // }
-
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.profile}>
@@ -40,11 +34,9 @@ const Profile = ({type}) => {
           <Text style={styles.role}>{type === 'profile' ? emails : roles}</Text>
         </View>
       </View>
-      {type === '' && (
-        <TouchableOpacity style={styles.icon}>
-          <ICNotification />
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity style={styles.icon}>
+        <ICNotification />
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 };

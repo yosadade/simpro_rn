@@ -29,7 +29,7 @@ const Dashboard = ({navigation}) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <Profile onPress={() => navigation.navigate('Profile')}/>
+        <Profile onPress={() => navigation.navigate('Profile')} />
         <Gap height={24} />
         <CardProjectProgress />
         <Gap height={24} />

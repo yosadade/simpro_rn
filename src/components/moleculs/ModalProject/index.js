@@ -56,13 +56,13 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
   });
   return (
     <Modal
+      useNativeDriver
       swipeDirection="left"
       animationInTiming={600}
-      animationOutTiming={800}
+      animationOutTiming={600}
       isVisible={isVisible}
       onBackdropPress={onBackdropPress}
-      style={styles.container}
-    >
+      style={styles.container}>
       <View style={styles.modal}>
         <View style={styles.header}>
           <Text style={styles.label}>{label}</Text>

@@ -1,7 +1,13 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Divider, Gap} from '../..';
-import {ICBuilding, ICClipboardPink, ILProfile} from '../../../assets';
+import {
+  ICBuilding,
+  ICClipboardPink,
+  ICEdit,
+  ICTrash,
+  ILProfile,
+} from '../../../assets';
 import {fonts} from '../../../utils';
 
 const CardEmployee = ({
@@ -25,9 +31,20 @@ const CardEmployee = ({
         <Gap height={4} />
         <Text style={styles.id}>Employee id : 000{id}</Text>
       </View>
-      <Gap width={24} />
+      <Gap width={12} />
       <View style={styles.detail}>
-        <Text style={styles.name}>{name}</Text>
+        <View style={styles.wrappers}>
+          <Text style={styles.name}>{name}</Text>
+          <View style={styles.wrapperBtn}>
+            <TouchableOpacity style={styles.btn} onPress={() => {}}>
+              <ICEdit />
+            </TouchableOpacity>
+            <Gap width={8} />
+            <TouchableOpacity style={styles.btn} onPress={() => {}}>
+              <ICTrash />
+            </TouchableOpacity>
+          </View>
+        </View>
         <Gap height={6} />
         <View style={styles.badges}>
           <Text style={styles.role}>{status ? 'ACTIVE' : 'NOT ACTIVE'}</Text>
@@ -90,10 +107,26 @@ const styles = StyleSheet.create({
     borderRadius: 70,
   },
   detail: {
+    flex: 1,
     borderLeftWidth: 0.5,
-    paddingLeft: 24,
+    paddingLeft: 12,
     borderColor: '#DEE2E6',
     justifyContent: 'space-between',
+  },
+  wrappers: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  wrapperBtn: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  btn: {
+    padding: 6,
+    borderColor: '#DEE2E6',
+    borderWidth: 0.5,
   },
   name: {
     fontSize: 14,
