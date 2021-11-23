@@ -1,4 +1,4 @@
-package com.simpro;
+package com.yosadade.simpro;
 
 import com.facebook.react.ReactActivity;
 
