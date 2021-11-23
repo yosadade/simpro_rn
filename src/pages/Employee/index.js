@@ -56,7 +56,7 @@ const Employee = ({navigation}) => {
           renderItem={item => {
             console.log(item.item);
             const {id, name, email, role, department, no_wa} = item.item;
-            const {start, status} = item.item.employee;
+            // const {start, status} = item?.item?.employee;
             return (
               <CardEmployee
                 id={id}
@@ -64,9 +64,9 @@ const Employee = ({navigation}) => {
                 email={email}
                 role={role}
                 department={department}
-                status={status}
+                status={item?.item?.employee?.status}
                 noWa={no_wa}
-                start={start}
+                start={item?.item?.employee?.start}
                 onPress={() => navigation.navigate('DetailEmployee', item)}
               />
             );

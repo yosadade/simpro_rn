@@ -1,5 +1,5 @@
 import React from 'react';
-import {LogBox} from 'react-native';
+import {LogBox, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import FlashMessage from 'react-native-flash-message';
 import {Provider, useSelector} from 'react-redux';
@@ -13,6 +13,7 @@ const MainApp = () => {
   const {isLoading} = useSelector(state => state.globalReducer);
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor="#484c7f" />
       <Routers />
       <FlashMessage position="top" />
       {isLoading && <Loading />}

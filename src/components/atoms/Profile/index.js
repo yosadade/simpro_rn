@@ -12,6 +12,7 @@ const Profile = ({type}) => {
   useEffect(() => {
     getData('userProfile')
       .then(res => {
+        console.log('localstorage', res);
         const {name, role, email} = res;
         setNames(name);
         setRoles(role);

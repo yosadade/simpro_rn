@@ -7,6 +7,12 @@ module.exports = (async () => {
   return {
     transformer: {
       babelTransformerPath: require.resolve('react-native-svg-transformer'),
+      getTransFormOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineReruires: true,
+        },
+      }),
     },
     resolver: {
       assetExts: assetExts.filter(ext => ext !== 'svg'),

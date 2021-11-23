@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     margin: 0,
     borderRadius: 4,
     flex: 1,
-    height: '90%',
+    // height: '50%',
   },
   modal: {
     backgroundColor: '#ffffff',

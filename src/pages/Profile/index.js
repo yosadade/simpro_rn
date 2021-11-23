@@ -34,7 +34,7 @@ const Profile = ({navigation}) => {
     <>
       <View style={styles.pages}>
         <Profiles type="profile" />
-        <Gap height={24}/>
+        <Gap height={24} />
         <View style={styles.content}>
           <TouchableOpacity style={styles.menu}>
             <ICEditBack />

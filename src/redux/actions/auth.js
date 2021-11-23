@@ -24,11 +24,13 @@ export const signInAction = (_dataLogin, navigation) => dispatch => {
 
   Axios.post(`${API_HOST.uri}/login`, _dataLogin)
     .then(res => {
+      dispatch(setLoading(true));
       const token = res.data.token;
-
+      const profile = res.data.data;
+      storeData('userProfile', profile);
       storeData('token', token);
-      dispatch(setLoading(false));
       navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
+      dispatch(setLoading(false));
     })
     .catch(err => {
       dispatch(setLoading(false));

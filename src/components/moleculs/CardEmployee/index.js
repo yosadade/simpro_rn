@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     borderRadius: 4,
     borderWidth: 0.5,
+    marginBottom: 24,
     borderColor: '#DEE2E6',
     alignItems: 'center',
   },
@@ -132,6 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.primary[700],
     color: '#212529',
+    textTransform: 'capitalize',
   },
   badge: {
     padding: 6,
