@@ -8,6 +8,7 @@ import CardProject from './CardProject';
 import CardEmployee from './CardEmployee';
 import ModalDashboard from './ModalDashboard';
 import ModalProject from './ModalProject';
+import ModalEmployee from './ModalEmployee';
 
 export {
   BottomNavigator,
@@ -20,4 +21,5 @@ export {
   CardEmployee,
   ModalDashboard,
   ModalProject,
+  ModalEmployee,
 };

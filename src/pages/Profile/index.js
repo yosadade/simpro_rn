@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   View,
   useColorScheme,
+  Image,
 } from 'react-native';
+import DocumentPicker from 'react-native-document-picker';
 import {
   ICEditBack,
   ICLanguage,

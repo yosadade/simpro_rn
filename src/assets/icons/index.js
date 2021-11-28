@@ -43,6 +43,7 @@ import ICStar from './star.svg';
 import ICProfile from './user.svg';
 import ICProfileActive from './profile-active.svg';
 import ICSignOutBig from './signout-big.svg';
+import ICCalendar from './calender.svg';
 
 export {
   ICLogo,
@@ -90,4 +91,5 @@ export {
   ICProfile,
   ICProfileActive,
   ICSignOutBig,
+  ICCalendar,
 };

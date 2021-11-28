@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "label": "Monthly",
+        "value": "monthly"
+    },
+    {
+        "id": 2,
+        "label": "Hourly",
+        "value": "hourly"
+    },
+    {
+        "id": 3,
+        "label": "Taskly",
+        "value": "taskly"
+    },
+    {
+        "id": 4,
+        "label": "Projectly",
+        "value": "projectly"
+    }
+]

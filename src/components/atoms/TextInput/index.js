@@ -1,6 +1,12 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import React from 'react';
-import {StyleSheet, View, TextInput as TextInputRN} from 'react-native';
+import {
+  StyleSheet,
+  TextInput as TextInputRN,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {ICCalendar} from '../../../assets';
 import {fonts} from '../../../utils';
 
 const TextInput = ({
@@ -12,10 +18,12 @@ const TextInput = ({
   value,
   onChangeText,
   keyboardType,
+  onPress,
+  date,
   ...restProps
 }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <TextInputRN
         keyboardType={keyboardType}
         style={styles.input}
@@ -25,8 +33,11 @@ const TextInput = ({
         style={styles.input}
         onChangeText={onChangeText}
         value={value}
+        disable={disable}
+        {...restProps}
       />
-    </View>
+      <View style={styles.icon}>{date && <ICCalendar />}</View>
+    </TouchableOpacity>
   );
 };
 
@@ -45,5 +56,10 @@ const styles = StyleSheet.create({
     marginTop: 8,
     borderWidth: 0,
     textAlignVertical: 'center',
+  },
+  icon: {
+    position: 'absolute',
+    top: 21,
+    right: 16,
   },
 });

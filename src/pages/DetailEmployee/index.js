@@ -45,7 +45,6 @@ const DetailEmployee = ({navigation, route}) => {
           noWa={no_wa}
           start={start}
         />
-        <Gap height={24} />
         <CardDetail
           label="Personal Informations"
           title1="Email"

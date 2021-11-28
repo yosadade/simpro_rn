@@ -14,6 +14,7 @@ import CustomModal from './CustomModal';
 import Dropdown from './Dropdown';
 import Select from './Select';
 import Loading from './Loading';
+import FileUpload from './FileUpload';
 
 export {
   Button,
@@ -32,4 +33,5 @@ export {
   Dropdown,
   Select,
   Loading,
+  FileUpload,
 };

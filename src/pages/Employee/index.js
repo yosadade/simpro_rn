@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   CardEmployee,
   Gap,
-  ModalProject,
+  ModalEmployee,
   Profile,
   SearchBar,
 } from '../../components';
@@ -56,7 +56,6 @@ const Employee = ({navigation}) => {
           renderItem={item => {
             console.log(item.item);
             const {id, name, email, role, department, no_wa} = item.item;
-            // const {start, status} = item?.item?.employee;
             return (
               <CardEmployee
                 id={id}
@@ -73,8 +72,8 @@ const Employee = ({navigation}) => {
           }}
         />
       </View>
-      <ModalProject
-        label="Create Project"
+      <ModalEmployee
+        label="Add Employee"
         isVisible={modalCreate}
         onBackdropPress={() => setModalCreate(!modalCreate)}
       />
