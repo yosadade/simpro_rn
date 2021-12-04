@@ -19,6 +19,7 @@ const CardEmployee = ({
   department,
   noWa,
   start,
+  onDelete,
 }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -40,7 +41,7 @@ const CardEmployee = ({
               <ICEdit />
             </TouchableOpacity>
             <Gap width={8} />
-            <TouchableOpacity style={styles.btn} onPress={() => {}}>
+            <TouchableOpacity style={styles.btn} onPress={onDelete}>
               <ICTrash />
             </TouchableOpacity>
           </View>

@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import moment from 'moment';
-import {setLoading} from '.';
+import {getProjectData, setLoading} from '.';
 import {API_HOST, getData, showMessage} from '../../utils';
 
 export const getEmployeeData = () => dispatch => {
@@ -85,8 +85,8 @@ export const setEmployeeData =
           })
             .then(ress => {
               dispatch(setLoading(false));
-              setFormUser('')
-              setForm('')
+              setFormUser('');
+              setForm('');
               showMessage(`${ress?.message}`);
             })
             .catch(errr => {
@@ -102,3 +102,22 @@ export const setEmployeeData =
         });
     });
   };
+
+export const deleteEmployeeData = id => dispatch => {
+  getData('token').then(token => {
+    Axios.delete(`${API_HOST.uri}/employee/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(res => {
+        dispatch(setLoading(false));
+        dispatch(getProjectData());
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(setLoading(false));
+      });
+  });
+};

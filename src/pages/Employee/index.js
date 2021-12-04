@@ -1,17 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {ICTrashBig} from '../../assets';
 import {
   CardEmployee,
+  CustomModal,
   Gap,
   ModalEmployee,
   Profile,
   SearchBar,
 } from '../../components';
-import {getEmployeeData} from '../../redux/actions';
+import {
+  deleteEmployeeData,
+  getEmployeeData,
+  setLoading,
+} from '../../redux/actions';
 
 const Employee = ({navigation}) => {
   const [modalCreate, setModalCreate] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const {employee} = useSelector(state => state.employeeReducer);
@@ -29,6 +36,11 @@ const Employee = ({navigation}) => {
 
   const onCreate = () => {
     setModalCreate(!modalCreate);
+  };
+
+  const onDeleteEmployee = id => {
+    dispatch(setLoading(true));
+    dispatch(deleteEmployeeData(id));
   };
 
   const ListHeaderComponent = () => {
@@ -57,17 +69,30 @@ const Employee = ({navigation}) => {
             console.log(item.item);
             const {id, name, email, role, department, no_wa} = item.item;
             return (
-              <CardEmployee
-                id={id}
-                name={name}
-                email={email}
-                role={role}
-                department={department}
-                status={item?.item?.employee?.status}
-                noWa={no_wa}
-                start={item?.item?.employee?.start}
-                onPress={() => navigation.navigate('DetailEmployee', item)}
-              />
+              <>
+                <CardEmployee
+                  id={id}
+                  name={name}
+                  email={email}
+                  role={role}
+                  department={department}
+                  status={item?.item?.employee?.status}
+                  noWa={no_wa}
+                  start={item?.item?.employee?.start}
+                  onDelete={() => setModalDelete(!modalDelete)}
+                  onPress={() => navigation.navigate('DetailEmployee', item)}
+                />
+                {modalDelete && (
+                  <CustomModal
+                    label="Delete item Permanently?"
+                    title="You can only delete this item permanently"
+                    icon={<ICTrashBig />}
+                    isVisible={modalDelete}
+                    onBackdropPress={() => setModalDelete(!modalDelete)}
+                    onSubmit={() => onDeleteEmployee(id)}
+                  />
+                )}
+              </>
             );
           }}
         />

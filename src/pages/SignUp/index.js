@@ -31,7 +31,6 @@ const SignUp = ({navigation}) => {
     const data = {
       ...form,
     };
-    console.log(form);
     dispatch(signUpAction(data, navigation));
   };
 

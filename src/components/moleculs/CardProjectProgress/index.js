@@ -1,9 +1,21 @@
 /* eslint-disable no-shadow */
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {fonts} from '../../../utils';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import axios from 'axios';
+import {API_HOST, fonts, getData} from '../../../utils';
 import {ProgressBar, Gap} from '../../../components';
-import {ICCheckRound, ICUnCheckBig, ICUnCheckRound} from '../../../assets';
+import {
+  ICCheckBig,
+  ICCheckRound,
+  ICUnCheckBig,
+  ICUnCheckRound,
+} from '../../../assets';
 import {CustomModal} from '../../atoms';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProjectData, setLoading} from '../../../redux/actions';
@@ -12,29 +24,161 @@ const colors = ['#ffc107', '#28a745', '#ffaa8a'];
 const randColor = colors[Math.floor(Math.random() * colors.length)];
 
 const CardProgressProject = () => {
-  const [check, setCheck] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [data, setData] = useState([]);
+  const [modalUnChecklist, setModalUnChecklist] = useState(false);
+  const [modalSuccesChecklist, setModalSuccessChecklist] = useState(false);
+  const [modalFailChecklist, setModalFailChecklist] = useState(false);
+  const [modalSuccess, setModalSuccess] = useState(false);
+  const [modalFail, setModalFail] = useState(false);
+  const [loadingId, setLoadingId] = useState(null);
+  const [token, setToken] = useState('');
 
   const dispatch = useDispatch();
   const {project} = useSelector(state => state.projectReducer);
-  const data = project.slice(0, 5);
 
   useEffect(() => {
     dispatch(getProjectData());
+    getData('token').then(token => {
+      setToken(token);
+    });
   }, [dispatch]);
 
   const onDailyScrum = item => {
+    setLoadingId(`loading-${item.id}`);
     dispatch(setLoading(true));
-    setModal(!modal);
-    setCheck(!check);
+    const {
+      id,
+      gitlab_project_id,
+      group_id,
+      daily_scrum,
+      groupType,
+      group_whatsapp,
+    } = item;
+    const dataFormTelegram = {
+      projectId: gitlab_project_id,
+      groupId: group_id,
+    };
+    const dataFormWhatsapp = {
+      projectId: gitlab_project_id,
+      groupId: group_whatsapp,
+      keyWoowa: '6f03ddf0ecf0e05dd422cfae215c40259737cbe07e3c8fe1',
+    };
+
+    if (groupType === 'Whatsapp') {
+      axios
+        .post(' https://bot-bee.qodr.or.id/api/v2/projects', dataFormWhatsapp, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(res => {
+          console.log('terkirim ke whatsapp', res.data);
+          const datas = new FormData();
+          datas.append('daily_scrum', !daily_scrum);
+          axios
+            .put(`${API_HOST.uri}/daily-scrum/${id}`, datas, {
+              headers: {
+                'content-type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            .then(() => {
+              const newData = data.map(item =>
+                item.id === id ? {...item, daily_scrum: !daily_scrum} : item,
+              );
+              setData(newData);
+              setLoadingId(null);
+              dispatch(setLoading(false));
+              dispatch(getProjectData());
+              setModalSuccess(!modalSuccess);
+            })
+            .catch(() => {
+              setLoadingId(null);
+              dispatch(setLoading(false));
+              setModalFail(!modalFail);
+            });
+        })
+        .catch(() => {
+          setLoadingId(null);
+          dispatch(setLoading(false));
+          setModalFail(!modalFail);
+        });
+    } else {
+      axios.post('https://bot-bee.qodr.or.id/api/projects', dataFormTelegram, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setModalSuccess(!modalSuccess);
+      const datas = new FormData();
+      datas.append('daily_scrum', !daily_scrum);
+      axios
+        .put(`${API_HOST.uri}/daily-scrum/${id}`, datas, {
+          headers: {
+            'content-type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(() => {
+          setModalSuccess(!modalSuccess);
+          const newData = data.map(item =>
+            item.id === id ? {...item, daily_scrum: !daily_scrum} : item,
+          );
+          setData(newData);
+          setLoadingId(null);
+          dispatch(setLoading(false));
+          dispatch(getProjectData());
+        })
+        .catch(() => {
+          setModalFail(!modalFail);
+          setLoadingId(null);
+          dispatch(setLoading(false));
+        })
+        .catch(() => {
+          setLoadingId(null);
+          dispatch(setLoading(false));
+          setModalFail(!modalFail);
+        });
+    }
+  };
+
+  const onUnCheclist = item => {
+    const {id, daily_scrum} = item;
+    console.log(id);
+    getData('token').then(token => {
+      const datas = new FormData();
+      datas.append('daily_scrum', false);
+      axios
+        .put(`${API_HOST.uri}/daily-scrum/${id}`, datas, {
+          headers: {
+            'content-type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(async () => {
+          const newData = data.map(item =>
+            item.id === id ? {...item, daily_scrum: !daily_scrum} : item,
+          );
+          setData(newData);
+          setLoadingId(null);
+          dispatch(getProjectData());
+          setModalSuccessChecklist(!modalSuccesChecklist);
+          console.log('Poof! berhasil unchecklist!');
+        })
+        .catch(() => {
+          setModalFailChecklist(!modalFailChecklist);
+          setModalUnChecklist(!modalUnChecklist);
+          console.log('Gagal!', 'gagal uncheklist', 'warning');
+        });
+    });
   };
 
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.label}>Project Active</Text>
-        {data.map(item => {
-          const {id, project, progress} = item;
+        {project.map(item => {
+          const {id, project, progress, daily_scrum} = item;
           return (
             <View style={styles.card} key={id}>
               <View style={styles.wrapper}>
@@ -44,9 +188,18 @@ const CardProgressProject = () => {
                   <Gap width={6} />
                   <TouchableOpacity
                     style={styles.btn}
-                    onPress={() => onDailyScrum(item)}
-                    disabled={false}>
-                    {check ? <ICCheckRound /> : <ICUnCheckRound />}
+                    onPress={
+                      daily_scrum
+                        ? () => onUnCheclist(item)
+                        : () => onDailyScrum(item)
+                    }>
+                    {loadingId === `loading-${id}` ? (
+                      <ActivityIndicator size={13} color="#F19828" />
+                    ) : daily_scrum ? (
+                      <ICCheckRound />
+                    ) : (
+                      <ICUnCheckRound />
+                    )}
                   </TouchableOpacity>
                 </View>
               </View>
@@ -56,13 +209,48 @@ const CardProgressProject = () => {
           );
         })}
       </View>
-      {modal && (
+      {modalSuccesChecklist && (
         <CustomModal
-          label="Uncheck daily scrum?"
-          title="You can only delete this item permanently"
+          type="daily scrum"
+          label="Success Uncheck"
+          title="Poof! Success Unchecklist!"
+          icon={<ICCheckBig />}
+          isVisible={modalSuccesChecklist}
+          onSubmit={() => setModalSuccessChecklist(!modalSuccesChecklist)}
+          onBackdropPress={() => setModalSuccessChecklist(!modalUnChecklist)}
+        />
+      )}
+      {modalFailChecklist && (
+        <CustomModal
+          type="daily scrum"
+          label="Failed Unchecklist"
+          title="Poof! check your internet connection!"
+          icon={<ICCheckBig />}
+          isVisible={modalFailChecklist}
+          onSubmit={() => setModalFailChecklist(!setModalFailChecklist)}
+          onBackdropPress={() => setModalFailChecklist(!setModalFailChecklist)}
+        />
+      )}
+      {modalSuccess && (
+        <CustomModal
+          type="daily scrum"
+          label="Success!!"
+          title="Daily scrum has been sent successfully"
+          icon={<ICCheckBig />}
+          isVisible={modalSuccess}
+          onSubmit={() => setModalSuccess(!modalSuccess)}
+          onBackdropPress={() => setModalSuccess(!modalSuccess)}
+        />
+      )}
+      {modalFail && (
+        <CustomModal
+          type="daily scrum"
+          label="Failed!!"
+          title="Daily scrum has failed to send"
           icon={<ICUnCheckBig />}
-          isVisible={modal}
-          onBackdropPress={() => setModal(!modal)}
+          isVisible={modalFail}
+          onSubmit={() => setModalFail(!modalFail)}
+          onBackdropPress={() => setModalFail(!modalFail)}
         />
       )}
     </>

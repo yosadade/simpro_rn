@@ -56,7 +56,7 @@ const Project = ({navigation}) => {
     <>
       <View style={styles.page}>
         <CardProject
-          data={filterDataProject}
+          data={filterDataProject.reverse()}
           ListHeaderComponent={ListHeaderComponent}
           onPress={() => navigation.navigate('DetailProject')}
         />

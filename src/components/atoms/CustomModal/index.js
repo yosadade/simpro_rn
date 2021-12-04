@@ -6,6 +6,7 @@ import {ICCancel} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
 const CustomModal = ({
+  type,
   label,
   icon,
   title,
@@ -20,13 +21,7 @@ const CustomModal = ({
       animationOutTiming={800}
       isVisible={isVisible}
       onBackdropPress={onBackdropPress}
-      style={styles.container}
-      // customBackdrop={
-      //   <TouchableWithoutFeedback onPress={() => setModal(!modal)}>
-      //     <View style={{ flex: 1 }} />
-      //   </TouchableWithoutFeedback>
-      // }
-    >
+      style={styles.container}>
       <View style={styles.modal}>
         <View style={styles.header}>
           <Text style={styles.label}>{label}</Text>
@@ -44,13 +39,17 @@ const CustomModal = ({
         <View style={styles.footer}>
           <View />
           <View style={styles.btnFooter}>
-            <Button
-              type="modal"
-              title="Cancel"
-              bgColor="#6C757D"
-              onPress={onBackdropPress}
-            />
-            <Gap width={4} />
+            {type === 'daily scrum' ? null : (
+              <>
+                <Button
+                  type="modal"
+                  title="Cancel"
+                  bgColor="#6C757D"
+                  onPress={onBackdropPress}
+                />
+                <Gap width={4} />
+              </>
+            )}
             <Button
               type="modal"
               title="Done"
