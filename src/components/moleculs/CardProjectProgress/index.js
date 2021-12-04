@@ -7,8 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import axios from 'axios';
-import {API_HOST, fonts, getData} from '../../../utils';
+import {fonts} from '../../../utils';
 import {ProgressBar, Gap} from '../../../components';
 import {
   ICCheckBig,
@@ -19,7 +18,10 @@ import {
 import {CustomModal} from '../../atoms';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProjectData, setLoading} from '../../../redux/actions';
-import {dailyScrumAction} from '../../../redux/actions/dailyScrum';
+import {
+  dailyScrumAction,
+  unChecklistAction,
+} from '../../../redux/actions/dailyScrum';
 
 const colors = ['#ffc107', '#28a745', '#ffaa8a'];
 const randColor = colors[Math.floor(Math.random() * colors.length)];
@@ -32,16 +34,12 @@ const CardProgressProject = () => {
   const [modalSuccess, setModalSuccess] = useState(false);
   const [modalFail, setModalFail] = useState(false);
   const [loadingId, setLoadingId] = useState(null);
-  const [token, setToken] = useState('');
 
   const dispatch = useDispatch();
   const {project} = useSelector(state => state.projectReducer);
 
   useEffect(() => {
     dispatch(getProjectData());
-    getData('token').then(token => {
-      setToken(token);
-    });
   }, [dispatch]);
 
   const onDailyScrum = item => {
@@ -158,34 +156,22 @@ const CardProgressProject = () => {
   // };
 
   const onUnCheclist = item => {
-    const {id, daily_scrum} = item;
-    console.log(id);
-    getData('token').then(token => {
-      const datas = new FormData();
-      datas.append('daily_scrum', false);
-      axios
-        .put(`${API_HOST.uri}/daily-scrum/${id}`, datas, {
-          headers: {
-            'content-type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(async () => {
-          const newData = data.map(item =>
-            item.id === id ? {...item, daily_scrum: !daily_scrum} : item,
-          );
-          setData(newData);
-          setLoadingId(null);
-          dispatch(getProjectData());
-          setModalSuccessChecklist(!modalSuccesChecklist);
-          console.log('Poof! berhasil unchecklist!');
-        })
-        .catch(() => {
-          setModalFailChecklist(!modalFailChecklist);
-          setModalUnChecklist(!modalUnChecklist);
-          console.log('Gagal!', 'gagal uncheklist', 'warning');
-        });
-    });
+    dispatch(setLoading(true));
+    dispatch(
+      unChecklistAction(
+        item,
+        data,
+        setData,
+        setLoadingId,
+        setModalSuccessChecklist,
+        modalSuccesChecklist,
+        setModalFailChecklist,
+        modalFailChecklist,
+        setModalUnChecklist,
+        modalUnChecklist,
+      ),
+    );
+    dispatch(setLoading(false));
   };
 
   return (

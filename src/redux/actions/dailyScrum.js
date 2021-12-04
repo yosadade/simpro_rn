@@ -123,3 +123,48 @@ export const dailyScrumAction =
       }
     });
   };
+
+export const unChecklistAction =
+  (
+    item,
+    data,
+    setData,
+    setLoadingId,
+    setModalSuccessChecklist,
+    modalSuccesChecklist,
+    setModalFailChecklist,
+    modalFailChecklist,
+    setModalUnChecklist,
+    modalUnChecklist,
+  ) =>
+  dispatch => {
+    const {id, daily_scrum} = item;
+    console.log(id);
+    getData('token').then(token => {
+      const datas = new FormData();
+      datas.append('daily_scrum', false);
+      axios
+        .put(`${API_HOST.uri}/daily-scrum/${id}`, datas, {
+          headers: {
+            'content-type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(async res => {
+          console.log(`berhasil put daily scrum id: ${id}`, res.data);
+          const newData = data.map(item =>
+            item.id === id ? {...item, daily_scrum: !daily_scrum} : item,
+          );
+          setData(newData);
+          setLoadingId(null);
+          dispatch(getProjectData());
+          setModalSuccessChecklist(!modalSuccesChecklist);
+          console.log('Poof! berhasil unchecklist!');
+        })
+        .catch(() => {
+          setModalFailChecklist(!modalFailChecklist);
+          setModalUnChecklist(!modalUnChecklist);
+          console.log('Gagal!', 'gagal uncheklist', 'warning');
+        });
+    });
+  };
