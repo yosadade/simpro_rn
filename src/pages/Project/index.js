@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  RefreshControl,
-  FlatList,
-} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import {
   CardProject,
   Gap,
@@ -14,25 +8,16 @@ import {
   Profile,
   SearchBar,
 } from '../../components';
-import {getProjectData} from '../../redux/actions';
 
 const Project = ({navigation}) => {
   const [modalCreate, setModalCreate] = useState(false);
   const [search, setSearch] = useState('');
-  const [refreshing, setRefreshing] = useState(false);
 
-  const dispatch = useDispatch();
   const {project} = useSelector(state => state.projectReducer);
 
   const filterDataProject = project.filter(item => {
     return item.project.indexOf(search) >= 0;
   });
-
-  const onRefresh = () => {
-    setRefreshing(true);
-    dispatch(getProjectData());
-    setRefreshing(false);
-  };
 
   const onCreate = () => {
     setModalCreate(!modalCreate);
@@ -45,7 +30,7 @@ const Project = ({navigation}) => {
         <Gap height={24} />
         <SearchBar
           placeholder="Search"
-          onSearch={value => setSearch(value)}
+          onSearch={e => setSearch(e)}
           onCreate={onCreate}
         />
       </>
@@ -56,7 +41,7 @@ const Project = ({navigation}) => {
     <>
       <View style={styles.page}>
         <CardProject
-          data={filterDataProject.reverse()}
+          data={filterDataProject}
           ListHeaderComponent={ListHeaderComponent}
           onPress={() => navigation.navigate('DetailProject')}
         />
