@@ -40,7 +40,7 @@ const CardFinance = () => {
           const {id, akun, value} = item;
           return (
             <View key={id}>
-              <View style={styles.wrapper} >
+              <View style={styles.wrapper}>
                 <View style={styles.wrapperCash}>
                   <View style={styles.image} />
                   <View>

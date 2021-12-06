@@ -7,7 +7,7 @@ export const showMessage = (message, type) => {
     type: type === 'success' ? 'success' : 'danger',
     backgroundColor: type === 'success' ? '#1ABC9C' : '#F8D7DA',
     titleStyle: {
-      color: '#842029',
+      color: type === 'success' ? '#ffffff' : '#842029',
       fontFamily: fonts.primary[400],
       fontSize: 14,
     },

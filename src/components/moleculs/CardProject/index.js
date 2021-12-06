@@ -8,6 +8,7 @@ import {
   FlatList,
   View,
 } from 'react-native';
+import Axios from 'axios';
 import 'moment/locale/id';
 import {useDispatch} from 'react-redux';
 import {ModalProject} from '..';
@@ -24,7 +25,7 @@ import {
   ICUnCheckBig,
   ILProfile,
 } from '../../../assets';
-import {fonts} from '../../../utils';
+import {API_HOST, fonts, getData, showMessage} from '../../../utils';
 import {getProjectData} from '../../../redux/actions';
 import {useNavigation} from '@react-navigation/native';
 
@@ -40,6 +41,25 @@ const CardProject = ({ListHeaderComponent, data}) => {
     setRefreshing(true);
     dispatch(getProjectData());
     setRefreshing(false);
+  };
+
+  const onDelete = id => {
+    getData('token').then(token => {
+      Axios.delete(`${API_HOST.uri}/project/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then(() => {
+          dispatch(getProjectData());
+          setModalDelete(!modalDelete);
+          showMessage('Poof! karyawan berhasil dihapus!', 'success');
+        })
+        .catch(() => {
+          setModalDelete(!modalDelete);
+          showMessage('Gagal!', 'Anda gagal delete karyawan!', 'warning');
+        });
+    });
   };
 
   return (
@@ -157,6 +177,7 @@ const CardProject = ({ListHeaderComponent, data}) => {
                 title="You can only delete this item permanently"
                 icon={<ICTrashBig />}
                 isVisible={modalDelete}
+                onSubmit={() => onDelete(id)}
                 onBackdropPress={() => setModalDelete(!modalDelete)}
               />
             )}
