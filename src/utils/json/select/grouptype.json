@@ -1,12 +1,12 @@
 [
     {
-        "id": 1,
-        "label": "Telegram",
-        "value": "Telegram"
-    },
-    {
         "id": 2,
         "label": "Whatsapp",
         "value": "Whatsapp"
+    },
+    {
+        "id": 1,
+        "label": "Telegram",
+        "value": "Telegram"
     }
 ]

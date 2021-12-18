@@ -36,7 +36,7 @@ const ModalEmployee = ({label, icon, title, onBackdropPress, isVisible}) => {
   });
 
   const [form, setForm] = useForm({
-    start: new Date('2020-06-15'),
+    start: Date.now(),
     clockify: '',
     status: true,
     accountNumber: '',
@@ -78,9 +78,6 @@ const ModalEmployee = ({label, icon, title, onBackdropPress, isVisible}) => {
   };
 
   const onCreateEmployee = () => {
-    // const dataUser = {
-    //   ...formUser,
-    // };
     console.log('data user', form);
     dispatch(
       setEmployeeData(

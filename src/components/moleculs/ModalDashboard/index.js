@@ -11,7 +11,13 @@ import {Button, Gap, Label, TextInput} from '../..';
 import {ICCancel} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const ModalDashboard = ({label, icon, title, onBackdropPress, isVisible}) => {
+const ModalDashboard = ({
+  label,
+  valueAccount,
+  valuenominal,
+  onBackdropPress,
+  isVisible,
+}) => {
   return (
     <Modal
       swipeDirection="left"
@@ -19,13 +25,7 @@ const ModalDashboard = ({label, icon, title, onBackdropPress, isVisible}) => {
       animationOutTiming={800}
       isVisible={isVisible}
       onBackdropPress={onBackdropPress}
-      style={styles.container}
-      // customBackdrop={
-      //   <TouchableWithoutFeedback onPress={() => setModal(!modal)}>
-      //     <View style={{ flex: 1 }} />
-      //   </TouchableWithoutFeedback>
-      // }
-    >
+      style={styles.container}>
       <View style={styles.modal}>
         <View style={styles.header}>
           <Text style={styles.label}>{label}</Text>
@@ -37,10 +37,10 @@ const ModalDashboard = ({label, icon, title, onBackdropPress, isVisible}) => {
           <View style={styles.content}>
             <Label title="Account" type="project" />
             <Gap height={8} />
-            <TextInput />
+            <TextInput value={valueAccount} />
             <Label title="Nominal" type="project" />
             <Gap height={8} />
-            <TextInput />
+            <TextInput value={valuenominal} />
           </View>
         </ScrollView>
         <Gap height={12} />

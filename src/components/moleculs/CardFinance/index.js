@@ -24,7 +24,8 @@ const CardFinance = () => {
     setModalDelete(!modalDelete);
   };
 
-  const onEdit = () => {
+  const onEdit = item => {
+    console.log(item);
     setModalEdit(!modalEdit);
   };
 
@@ -58,7 +59,9 @@ const CardFinance = () => {
                   </View>
                 </View>
                 <View style={styles.wrapperBtn}>
-                  <TouchableOpacity style={styles.btn} onPress={onEdit}>
+                  <TouchableOpacity
+                    style={styles.btn}
+                    onPress={() => onEdit(item)}>
                     <ICEdit />
                   </TouchableOpacity>
                   {akun === 'Piutang' || akun === 'Est. Income' ? (

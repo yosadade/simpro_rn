@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DocumentPicker from 'react-native-document-picker';
@@ -16,6 +17,7 @@ import {colors, fonts, showMessage} from '../../../utils';
 import {JSONGroupType, JSONModel, JSONStatus} from '../../../utils/json';
 import useForm from '../../../utils/userForm';
 import moment from 'moment';
+import {setProjectData} from '../../../redux/actions';
 
 const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
   const [form, setForm] = useForm({
@@ -30,32 +32,32 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
     mobile: '',
     designer: '',
     analisis_design: '',
-    date_analisis_design: new Date('2020-06-15'),
+    date_analisis_design: Date.now(),
     proposal: '',
-    date_proposal: new Date('2020-06-15'),
+    date_proposal: Date.now(),
     mou: '',
     date_mou: '',
     akad_dev: '',
-    date_akad_dev: new Date('2020-06-15'),
+    date_akad_dev: Date.now(),
     group_client: '',
     group_developer: '',
     repayment: '',
-    date_repayment: new Date('2020-06-15'),
-    start: new Date('2020-06-15'),
-    timeline: new Date('2020-06-15'),
+    date_repayment: Date.now(),
+    start: Date.now(),
+    timeline: Date.now(),
     note: '',
     daily_scrum: false,
     portfolio: '',
     testimoni: '',
-    date_testimoni: new Date('2020-06-15'),
+    date_testimoni: Date.now(),
     handover: '',
-    date_handover: new Date('2020-06-15'),
+    date_handover: Date.now(),
     gitlab: '',
     gitlab_project_id: 0,
     group_id: 0,
     group_whatsapp: null,
     keyWoowa: null,
-    groupType: '',
+    groupType: 'Whatsapp',
   });
   const [showDatePickerStart, setShowDatePickerStart] = useState(false);
   const [showDatePickerTimeline, setShowDatePickerTimeline] = useState(false);
@@ -63,17 +65,18 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
   const [fileMouDev, setFileMouDev] = useState('');
   const [fileHandOver, setFileHandOver] = useState('');
 
+  const dispatch = useDispatch();
+
   const onDatePickerStart = (event, dates) => {
     const currentDate = dates || form.start;
     setShowDatePickerStart(Platform.OS === 'ios');
-    setForm('start', moment(currentDate).format('YYYY-MM-DD'));
-    console.log(moment(currentDate).format('YYYY-MM-DD'));
+    setForm('start', new Date(moment(currentDate).format('YYYY-MM-DD')));
   };
 
   const onDatePickerTimeline = (event, dates) => {
     const currentDate = dates || form.timeline;
     setShowDatePickerTimeline(Platform.OS === 'ios');
-    setForm('timeline', moment(currentDate).format('YYYY-MM-DD'));
+    setForm('timeline', new Date(moment(currentDate).format('YYYY-MM-DD')));
     console.log(moment(currentDate).format('YYYY-MM-DD'));
   };
 
@@ -129,7 +132,48 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
   };
 
   const onSubmit = () => {
-    console.log(form);
+    dispatch(
+      setProjectData(
+        form.project,
+        form.status,
+        form.model,
+        form.progress,
+        form.value,
+        form.pm,
+        form.frontend,
+        form.backend,
+        form.mobile,
+        form.designer,
+        form.analisis_design,
+        form.date_analisis_design,
+        form.proposal,
+        form.date_proposal,
+        form.mou,
+        form.date_mou,
+        form.akad_dev,
+        form.date_akad_dev,
+        form.group_client,
+        form.group_developer,
+        form.repayment,
+        form.date_repayment,
+        form.start,
+        form.timeline,
+        form.note,
+        form.daily_scrum,
+        form.portfolio,
+        form.testimoni,
+        form.date_testimoni,
+        form.handover,
+        form.date_handover,
+        form.gitlab,
+        form.gitlab_project_id,
+        form.group_id,
+        form.group_whatsapp,
+        form.keyWoowa,
+        form.groupType,
+        setForm('reset'),
+      ),
+    );
   };
 
   return (
@@ -206,12 +250,6 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
                 value={form.gitlab_project_id}
                 onChangeText={value => setForm('gitlab_project_id', value)}
               />
-              <Label title="Daily Scrum" type="project" />
-              <Gap height={8} />
-              <TextInput
-                value={form.daily_scrum}
-                onChangeText={value => setForm('daily_scrum', value)}
-              />
               <Label title="Project Manager" type="project" />
               <Gap height={8} />
               <TextInput
@@ -240,13 +278,13 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
               <Gap height={8} />
               <FileUpload
                 onChangeText={onSelectFileMouProject}
-                fileName={fileMouProject}
+                fileName={fileMouProject.length < 1 ? fileMouProject : ''}
               />
               <Label title="Mou Dev" type="project" />
               <Gap height={8} />
               <FileUpload
                 onChangeText={onSelectFileMouDev}
-                fileName={fileMouDev}
+                fileName={fileMouDev.length < 1 ? fileMouDev : ''}
               />
               <Label title="Payment" type="project" />
               <Gap height={8} />
@@ -258,16 +296,16 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
               <Label title="Hand Over" type="project" />
               <FileUpload
                 onChangeText={onSelectFileHandOver}
-                fileName={fileHandOver}
+                fileName={fileHandOver.length < 1 ? fileHandOver : ''}
               />
               <Label title="Group Type" type="project" />
               <Gap height={8} />
               <Select
                 data={JSONGroupType}
-                value={form.grouptype}
-                onSelectChange={value => setForm('grouptype', value)}
+                value={form.groupType}
+                onSelectChange={value => setForm('groupType', value)}
               />
-              {form.grouptype === 'Telegram' ? (
+              {form.groupType === 'Telegram' && (
                 <>
                   <Label title="Telegram Group" type="project" />
                   <Gap height={8} />
@@ -282,7 +320,8 @@ const ModalProject = ({label, icon, title, onBackdropPress, isVisible}) => {
                     onChangeText={value => setForm('group_id', value)}
                   />
                 </>
-              ) : (
+              )}
+              {form.groupType === 'Whatsapp' && (
                 <>
                   <Label title="Whatsapp Group" type="project" />
                   <Gap height={8} />
